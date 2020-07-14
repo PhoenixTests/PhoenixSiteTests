@@ -9,5 +9,6 @@
     <file url="file://$PROJECT_DIR$/src/test/java/SocialsTest.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/test/java/UserInterfaceTest.java" charset="windows-1251" />
     <file url="file://$PROJECT_DIR$/src/test/resources/allure.properties" charset="windows-1251" />
+    <file url="PROJECT" charset="windows-1251" />
   </component>
 </project>

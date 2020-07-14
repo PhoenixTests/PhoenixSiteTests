@@ -1,3 +1,5 @@
+package mobileCommunication.mobileCommunication.rates;
+
 import com.tngtech.junit.dataprovider.DataProvider;
 import com.tngtech.junit.dataprovider.DataProviderExtension;
 import com.tngtech.junit.dataprovider.UseDataProvider;

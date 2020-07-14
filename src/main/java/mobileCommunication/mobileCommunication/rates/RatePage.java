@@ -1,3 +1,5 @@
+package mobileCommunication.mobileCommunication.rates;
+
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
