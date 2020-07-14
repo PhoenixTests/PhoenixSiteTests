@@ -1,3 +1,5 @@
+package mobileCommunication.mobileCommunication.rates;
+
 import io.qameta.allure.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

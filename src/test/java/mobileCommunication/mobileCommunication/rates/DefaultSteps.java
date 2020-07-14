@@ -1,3 +1,5 @@
+package mobileCommunication.mobileCommunication.rates;
+
 import io.qameta.allure.Step;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

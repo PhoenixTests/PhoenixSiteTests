@@ -1,5 +1,9 @@
+package mobileCommunication.mobileCommunication.rates;
+
 import io.qameta.allure.*;
 import jdk.jfr.Description;
+import mobileCommunication.mobileCommunication.rates.DefaultSteps;
+import mobileCommunication.mobileCommunication.rates.RatePage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
