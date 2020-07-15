@@ -4,10 +4,14 @@ import com.tngtech.junit.dataprovider.DataProvider;
 import com.tngtech.junit.dataprovider.DataProviderExtension;
 import com.tngtech.junit.dataprovider.UseDataProvider;
 import com.tngtech.junit.dataprovider.UseDataProviderExtension;
+import common.CommonPageActions;
 import common.CommonSteps;
 import io.qameta.allure.*;
 import jdk.jfr.Description;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,7 +45,7 @@ public class RateSelectionTest {
 
     @Step("Проверить, виден ли на данный момент тариф {rateName} в карусели тарифов")
     public void getVisibleRate(String rateName) {
-        ratePage.scrollIntoView(ratePage.getActiveElements().last());
+        CommonPageActions.scrollIntoView(ratePage.getActiveElements().last());
         ratePage.isRateVisible(rateName);
     }
 
@@ -101,7 +105,6 @@ public class RateSelectionTest {
     }
 
     @TestTemplate
-    @Order(1)
     @UseDataProvider("rateInfo")
     @DisplayName("Подбор правильного тарифа")
     @Description("Тест на правильность подбора, в соответствии со значениями ползунков")
@@ -117,7 +120,6 @@ public class RateSelectionTest {
     }
 
     @TestTemplate
-    @Order(2)
     @UseDataProvider("rates")
     @DisplayName("Нажатие на кнопку '>' и выбор тарифа из карусели")
     @Description("Тест на работу кнопки '>' у карусели и корректный переход по кнопке 'Подробнее' у тарифа из карусели")
@@ -130,7 +132,6 @@ public class RateSelectionTest {
     }
 
     @TestTemplate
-    @Order(3)
     @UseDataProvider("rates")
     @DisplayName("Нажатие на кнопку '<' и выбор тарифа из карусели")
     @Description("Тест на работу кнопки '<' у карусели и корректный переход по кнопке 'Подробнее' у тарифа из карусели")

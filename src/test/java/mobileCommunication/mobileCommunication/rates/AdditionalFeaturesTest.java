@@ -6,7 +6,6 @@ import io.qameta.allure.*;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @Epic("Дополнительные возможности")
@@ -36,7 +35,6 @@ public class AdditionalFeaturesTest {
     }
 
     @Test
-    @Order(1)
     @DisplayName("Обратиться к оператору за помощью")
     @Description("Переход на страницу Личного кабинета, чтобы связаться в онлайн-чате с оператором")
     @Severity(SeverityLevel.NORMAL)
@@ -48,7 +46,6 @@ public class AdditionalFeaturesTest {
     }
 
     @Test
-    @Order(2)
     @DisplayName("Перейти на страницу отзывов")
     @Description("Переход на страницу, где можно заполнить и отослать анкету")
     @Severity(SeverityLevel.NORMAL)

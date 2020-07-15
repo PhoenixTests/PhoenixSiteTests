@@ -6,8 +6,6 @@ import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
 import lombok.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
@@ -98,19 +96,8 @@ public class RatePage {
 //        rfRange.val(String.valueOf(rf));
     }
 
-    public int getCountOfOpenedWindows() {
-        return WebDriverRunner.getWebDriver().getWindowHandles().size();
-    }
-
     public String getPageTitle() {
         return WebDriverRunner.getWebDriver().getTitle().split("\\|")[0].trim();
     }
 
-    public byte[] takeScreenshot() {
-        return ((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES);
-    }
-
-    public void scrollIntoView(SelenideElement element) {
-        element.scrollIntoView(true);
-    }
 }

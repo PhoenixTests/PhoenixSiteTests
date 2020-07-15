@@ -1,10 +1,10 @@
 package mobileCommunication.mobileCommunication.rates;
 
+import common.CommonPageActions;
 import common.CommonSteps;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -36,7 +36,7 @@ public class UserInterfaceTest {
 
     @Attachment(value = "Скриншот страницы тарифов после возврата на предыдущую страницу", type = "image/png")
     public byte[] takeScreenshot() {
-        return ratePage.takeScreenshot();
+        return CommonPageActions.takeScreenshot();
     }
 
     /*@BeforeAll
@@ -58,7 +58,6 @@ public class UserInterfaceTest {
     }
 
     @Test
-    @Order(1)
     @DisplayName("Возврат на предыдущую страницу")
     @Description("Возврат на предыдущую страницу после подбора тарифа и перехода на страницу тарифа")
     @Severity(SeverityLevel.CRITICAL)
@@ -70,7 +69,6 @@ public class UserInterfaceTest {
     }
 
     @Test
-    @Order(2)
     @DisplayName("Закрыть окно с тарифом")
     @Description("Закрытие всплывающего окна с подобранным тарифом")
     @Severity(SeverityLevel.NORMAL)

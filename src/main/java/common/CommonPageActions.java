@@ -1,7 +1,10 @@
 package common;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 public class CommonPageActions {
     public static void openPage(String URL) {
@@ -23,5 +26,17 @@ public class CommonPageActions {
     public static void closeCurrentTabAndReturnToMain() {
         Selenide.closeWindow();
         Selenide.switchTo().window(0);
+    }
+
+    public static void scrollIntoView(SelenideElement element) {
+        element.scrollIntoView(true);
+    }
+
+    public static int getCountOfOpenedWindows() {
+        return WebDriverRunner.getWebDriver().getWindowHandles().size();
+    }
+
+    public static byte[] takeScreenshot() {
+        return ((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
 }

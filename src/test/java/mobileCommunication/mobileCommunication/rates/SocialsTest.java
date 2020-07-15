@@ -22,7 +22,7 @@ public class SocialsTest {
 
     @Step("Пролистнуть до иконок соцсетей")
     public void scrollIntoView(String url) {
-        ratePage.scrollIntoView(ratePage.getSocialIcon(url));
+        CommonPageActions.scrollIntoView(ratePage.getSocialIcon(url));
     }
 
     @Step("Нажать на иконку соцсети")
@@ -37,7 +37,7 @@ public class SocialsTest {
 
     @Step("При проверка значка почты проверяем, открылось ли новая вкладка")
     public void mailCheck() {
-        assertEquals(2, ratePage.getCountOfOpenedWindows());
+        assertEquals(2, CommonPageActions.getCountOfOpenedWindows());
     }
 
     @DataProvider
