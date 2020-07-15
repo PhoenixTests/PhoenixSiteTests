@@ -22,10 +22,6 @@ public class ServicePage {
     private SelenideElement button;
 
 
-    public ServicePage() {
-        Selenide.open(URL);
-    }
-
     public SelenideElement setLabel(String nameLabel){
         label = $(byText(nameLabel));
         return label;

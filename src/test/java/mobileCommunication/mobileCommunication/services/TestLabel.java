@@ -2,8 +2,10 @@ package mobileCommunication.mobileCommunication.services;
 
 import com.codeborne.selenide.Condition;
 import com.tngtech.junit.dataprovider.*;
+import common.CommonSteps;
 import io.qameta.allure.*;
 
+import mobileCommunication.mobileCommunication.rates.RatePage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(DataProviderExtension.class)
 public class TestLabel {
 
-    private ServicePage servicePage;
+    private ServicePage servicePage = new ServicePage();
 
     @DataProvider
     public static Object[][] dataLabel() {
@@ -65,7 +67,7 @@ public class TestLabel {
     @Description("Тест на просмотр информации по каждой услуге нажатием на название")
     @Severity(SeverityLevel.NORMAL)
     public void label(String nameLabel, String idBody, String idButton){
-        servicePage = DefaultStepsService.openPage();
+        CommonSteps.openPage(servicePage.getPageName(), servicePage.getURL());
         clickLabel(nameLabel);
         assertEquals(true, checkBodyOpen(idBody));
         clickButton(idButton);
