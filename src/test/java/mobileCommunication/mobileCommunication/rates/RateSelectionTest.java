@@ -4,13 +4,10 @@ import com.tngtech.junit.dataprovider.DataProvider;
 import com.tngtech.junit.dataprovider.DataProviderExtension;
 import com.tngtech.junit.dataprovider.UseDataProvider;
 import com.tngtech.junit.dataprovider.UseDataProviderExtension;
+import common.CommonSteps;
 import io.qameta.allure.*;
 import jdk.jfr.Description;
-import mobileCommunication.mobileCommunication.rates.DefaultSteps;
-import mobileCommunication.mobileCommunication.rates.RatePage;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.TestTemplate;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Epic("Тарифы")
 @Feature("Тестирование подбора тарифа и карусели тарифов")
 public class RateSelectionTest {
-    private RatePage ratePage;
+    private static RatePage ratePage;
 
     @Step("Проверка на совпадение подобранного тарифа с {rateName}")
     public void checkRateName(String rateName) {
@@ -67,9 +64,15 @@ public class RateSelectionTest {
         ratePage.getCarouselRateButton().click();
     }
 
-    @BeforeEach
-    public void openPage(){
-        ratePage = DefaultSteps.openPage();
+    @BeforeAll
+    public static void openPage(){
+        ratePage = new RatePage();
+        CommonSteps.openPage(RatePage.getPageName(), RatePage.getURL());
+    }
+
+    @AfterEach
+    public void returnBack() {
+        CommonSteps.returnBack();
     }
 
     @DataProvider
@@ -98,14 +101,15 @@ public class RateSelectionTest {
     }
 
     @TestTemplate
+    @Order(1)
     @UseDataProvider("rateInfo")
     @DisplayName("Подбор правильного тарифа")
     @Description("Тест на правильность подбора, в соответствии со значениями ползунков")
     @Severity(SeverityLevel.CRITICAL)
     public void shouldSelectCorrectRate(int calls, int gb, int sms, int rf, String rateName,
                                                int ratePrice, String rateTitle) {
-        DefaultSteps.changeRanges(ratePage, calls,gb,sms,rf);
-        DefaultSteps.getRateClick(ratePage);
+        DefaultRateSteps.changeRanges(ratePage, calls,gb,sms,rf);
+        DefaultRateSteps.getRateClick(ratePage);
         checkRateName(rateName);
         checkRatePrice(ratePrice);
         rateNameButtonClick();
@@ -113,6 +117,7 @@ public class RateSelectionTest {
     }
 
     @TestTemplate
+    @Order(2)
     @UseDataProvider("rates")
     @DisplayName("Нажатие на кнопку '>' и выбор тарифа из карусели")
     @Description("Тест на работу кнопки '>' у карусели и корректный переход по кнопке 'Подробнее' у тарифа из карусели")
@@ -125,6 +130,7 @@ public class RateSelectionTest {
     }
 
     @TestTemplate
+    @Order(3)
     @UseDataProvider("rates")
     @DisplayName("Нажатие на кнопку '<' и выбор тарифа из карусели")
     @Description("Тест на работу кнопки '<' у карусели и корректный переход по кнопке 'Подробнее' у тарифа из карусели")
