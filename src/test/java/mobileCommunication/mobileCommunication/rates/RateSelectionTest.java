@@ -4,11 +4,12 @@ import com.tngtech.junit.dataprovider.DataProvider;
 import com.tngtech.junit.dataprovider.DataProviderExtension;
 import com.tngtech.junit.dataprovider.UseDataProvider;
 import com.tngtech.junit.dataprovider.UseDataProviderExtension;
+import common.CommonPageActions;
+import common.CommonSteps;
 import io.qameta.allure.*;
 import jdk.jfr.Description;
-import mobileCommunication.mobileCommunication.rates.DefaultSteps;
-import mobileCommunication.mobileCommunication.rates.RatePage;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Epic("Тарифы")
 @Feature("Тестирование подбора тарифа и карусели тарифов")
 public class RateSelectionTest {
-    private RatePage ratePage;
+    private static RatePage ratePage;
 
     @Step("Проверка на совпадение подобранного тарифа с {rateName}")
     public void checkRateName(String rateName) {
@@ -44,7 +45,7 @@ public class RateSelectionTest {
 
     @Step("Проверить, виден ли на данный момент тариф {rateName} в карусели тарифов")
     public void getVisibleRate(String rateName) {
-        ratePage.scrollIntoView(ratePage.getActiveElements().last());
+        CommonPageActions.scrollIntoView(ratePage.getActiveElements().last());
         ratePage.isRateVisible(rateName);
     }
 
@@ -67,9 +68,15 @@ public class RateSelectionTest {
         ratePage.getCarouselRateButton().click();
     }
 
-    @BeforeEach
-    public void openPage(){
-        ratePage = DefaultSteps.openPage();
+    @BeforeAll
+    public static void openPage(){
+        ratePage = new RatePage();
+        CommonSteps.openPage(RatePage.getPageName(), RatePage.getURL());
+    }
+
+    @AfterEach
+    public void returnBack() {
+        CommonSteps.returnBack();
     }
 
     @DataProvider
@@ -104,8 +111,8 @@ public class RateSelectionTest {
     @Severity(SeverityLevel.CRITICAL)
     public void shouldSelectCorrectRate(int calls, int gb, int sms, int rf, String rateName,
                                                int ratePrice, String rateTitle) {
-        DefaultSteps.changeRanges(ratePage, calls,gb,sms,rf);
-        DefaultSteps.getRateClick(ratePage);
+        DefaultRateSteps.changeRanges(ratePage, calls,gb,sms,rf);
+        DefaultRateSteps.getRateClick(ratePage);
         checkRateName(rateName);
         checkRatePrice(ratePrice);
         rateNameButtonClick();

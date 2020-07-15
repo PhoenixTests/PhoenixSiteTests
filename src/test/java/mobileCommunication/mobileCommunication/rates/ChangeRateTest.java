@@ -4,8 +4,8 @@ import com.tngtech.junit.dataprovider.DataProvider;
 import com.tngtech.junit.dataprovider.DataProviderExtension;
 import com.tngtech.junit.dataprovider.UseDataProvider;
 import com.tngtech.junit.dataprovider.UseDataProviderExtension;
+import common.CommonSteps;
 import io.qameta.allure.*;
-import mobileCommunication.mobileCommunication.rates.RatePage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,9 +37,10 @@ public class ChangeRateTest {
     @Description("Тест на корректность ссылок для смены тарифа")
     @Severity(SeverityLevel.CRITICAL)
     public void shouldRedirectToPrivateCabinet(String linkText, String url) {
-        ratePage= DefaultSteps.openPage();
+        ratePage=new RatePage();
+        CommonSteps.openPage(RatePage.getPageName(), RatePage.getURL());
         clickOnLink(linkText);
-        DefaultSteps.checkIsCorrectUrl(ratePage,url);
-        DefaultSteps.returnBack(ratePage);
+        CommonSteps.checkIsCorrectUrl(url);
+        CommonSteps.returnBack();
     }
 }

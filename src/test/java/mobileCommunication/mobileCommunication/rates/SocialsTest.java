@@ -4,6 +4,8 @@ import com.tngtech.junit.dataprovider.DataProvider;
 import com.tngtech.junit.dataprovider.DataProviderExtension;
 import com.tngtech.junit.dataprovider.UseDataProvider;
 import com.tngtech.junit.dataprovider.UseDataProviderExtension;
+import common.CommonPageActions;
+import common.CommonSteps;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestTemplate;
@@ -20,7 +22,7 @@ public class SocialsTest {
 
     @Step("Пролистнуть до иконок соцсетей")
     public void scrollIntoView(String url) {
-        ratePage.scrollIntoView(ratePage.getSocialIcon(url));
+        CommonPageActions.scrollIntoView(ratePage.getSocialIcon(url));
     }
 
     @Step("Нажать на иконку соцсети")
@@ -30,12 +32,12 @@ public class SocialsTest {
 
     @Step("Закрыть вкладку с соцсетью")
     public void closeWindow() {
-        ratePage.closeCurrentTabAndReturnToMain();
+        CommonPageActions.closeCurrentTabAndReturnToMain();
     }
 
     @Step("При проверка значка почты проверяем, открылось ли новая вкладка")
     public void mailCheck() {
-        assertEquals(2, ratePage.getCountOfOpenedWindows());
+        assertEquals(2, CommonPageActions.getCountOfOpenedWindows());
     }
 
     @DataProvider
@@ -54,15 +56,16 @@ public class SocialsTest {
     @Description("Тест на переход по иконкам соцсетей")
     @Severity(SeverityLevel.NORMAL)
     public void shouldRedirectToSocials(String url) {
-        ratePage= DefaultSteps.openPage();
+        ratePage= new RatePage();
+        CommonSteps.openPage(RatePage.getPageName(), RatePage.getURL());
         if (ratePage.getSocialIcon(url) != null) {
             scrollIntoView(url);
             clickOnSocials(url);
-            DefaultSteps.switchToAnotherWindow(ratePage,1);
+            CommonSteps.switchToAnotherWindow(1);
             if (url.equals("mailto:Info@phoenix-dnr.ru"))
                 mailCheck();
             else
-                DefaultSteps.checkIsCorrectUrl(ratePage,url);
+                CommonSteps.checkIsCorrectUrl(url);
             closeWindow();
         }
     }

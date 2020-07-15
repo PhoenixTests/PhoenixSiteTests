@@ -1,5 +1,7 @@
 package mobileCommunication.mobileCommunication.rates;
 
+import common.CommonPageActions;
+import common.CommonSteps;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,7 +12,7 @@ import static com.codeborne.selenide.Condition.visible;
 @Epic("Пользовательский интерфейс")
 @Feature("Тестирование пользовательского интерфейса")
 public class UserInterfaceTest {
-    private RatePage ratePage;
+    private static RatePage ratePage;
 
     @Step("Переход на страницу с подобранным тарифом")
     public void rateInfo() {
@@ -34,14 +36,25 @@ public class UserInterfaceTest {
 
     @Attachment(value = "Скриншот страницы тарифов после возврата на предыдущую страницу", type = "image/png")
     public byte[] takeScreenshot() {
-        return ratePage.takeScreenshot();
+        return CommonPageActions.takeScreenshot();
     }
 
+    /*@BeforeAll
+    public static void openPage() {
+        ratePage= new RatePage();
+        CommonSteps.openPage(ratePage.getPageName(), ratePage.getURL());
+    }*/
+
+    //вообще желательно бы разбить это на @BeforeAll, где было бы открытие вкладки, но т.к. щас
+    //если подобрать тариф, перейти на страницу тарифа, вернуться назад, изменить ползунки и снова нажать на
+    //кнопку подбора тарифа,нихрена не будет, то тест shouldClosePopupWindowWithSelectedRate провалится
+    //и вообще не хочу щас этим заниматься
     @BeforeEach
     public void defaultSteps() {
-        ratePage= DefaultSteps.openPage();
-        DefaultSteps.changeRanges(ratePage,0,50,0,25);
-        DefaultSteps.getRateClick(ratePage);
+        ratePage= new RatePage();
+        CommonSteps.openPage(RatePage.getPageName(), RatePage.getURL());
+        DefaultRateSteps.changeRanges(ratePage,0,50,0,25);
+        DefaultRateSteps.getRateClick(ratePage);
     }
 
     @Test
@@ -50,7 +63,7 @@ public class UserInterfaceTest {
     @Severity(SeverityLevel.CRITICAL)
     public void shouldReturnToThePreviousSelectedRate() {
         rateInfo();
-        DefaultSteps.returnBack(ratePage);
+        CommonSteps.returnBack();
         setCalls(50);
         isPopupVisible();
     }
