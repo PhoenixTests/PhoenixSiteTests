@@ -1,6 +1,5 @@
 package mobileCommunication.mobileCommunication.services;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import lombok.*;
 
