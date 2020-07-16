@@ -1,6 +1,6 @@
 :DocName: Тест план
 :DocDescription: Тест план
-:ProjectName: Тест раздела Услуги
+:ProjectName: Сайт Феникса
 :Version: 1.2
 :Confidentiality: Для внутреннего использования
 :Author: Розанова Светлана Андреевна
@@ -115,7 +115,6 @@
 |Название |Адрес
 
 |Окружение | http://phoenix-dnr.ru/mobile-services.php
-| |
 |====
 
 === Тестовые аккаунты

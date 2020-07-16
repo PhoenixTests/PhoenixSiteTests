@@ -1,6 +1,5 @@
 package mobileCommunication.mobileCommunication.services;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import lombok.*;
 
@@ -21,10 +20,6 @@ public class ServicePage {
     private SelenideElement body;
     private SelenideElement button;
 
-
-    public ServicePage() {
-        Selenide.open(URL);
-    }
 
     public SelenideElement setLabel(String nameLabel){
         label = $(byText(nameLabel));
