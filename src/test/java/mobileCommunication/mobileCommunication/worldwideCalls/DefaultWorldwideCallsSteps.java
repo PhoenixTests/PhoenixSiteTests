@@ -26,7 +26,7 @@ public class DefaultWorldwideCallsSteps {
         worldwideCallsPage.checkOperatorCodesList();
     }
 
-    @Step("Нажать на {country} из списка «{unitName}»")
+    @Step("Нажать на {++country} страну/спутниковую сеть из списка «{unitName}»")
     public static String clickOnCountry(WorldwideCallsPage worldwideCallsPage, int country,  String unitName) {
         worldwideCallsPage.setCountries(country);
         String countryName = worldwideCallsPage.getCountryName().getText();

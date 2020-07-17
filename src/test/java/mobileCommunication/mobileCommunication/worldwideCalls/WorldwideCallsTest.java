@@ -16,7 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(DataProviderExtension.class)
 @Epic("Раздел «Звонки по всему миру»")
 @Feature("Тестирование выбора страны/спутниковой сети, просмотра тарификации")
-public class PopularTest {
+public class WorldwideCallsTest {
     private static WorldwideCallsPage worldwideCallsPage;
 
     @BeforeAll
@@ -25,6 +25,15 @@ public class PopularTest {
         CommonSteps.openPage(WorldwideCallsPage.getPageName(), WorldwideCallsPage.getURL());
     }
 
+    @Step("Нажать на букву {letter} из алфавита")
+    public void clickOnLetter(String letter, int letterNum) {
+        worldwideCallsPage.getAlphabet().get(letterNum).click();
+    }
+
+    @Step("Нажать на кнопку с буквой под алфавитом")
+    public void clickOnLetterButton() {
+        worldwideCallsPage.getLetter().click();
+    }
 
     @DataProvider
     public static Object[] unitNames() {
@@ -67,9 +76,9 @@ public class PopularTest {
         DefaultWorldwideCallsSteps.openWorldWidePageUnit(worldwideCallsPage, "Все страны");
         int alphabetSize = worldwideCallsPage.getAlphabet().size();
         for (int letter = 0; letter < alphabetSize; letter++) {
-            worldwideCallsPage.getAlphabet().get(letter).click();
+            clickOnLetter(worldwideCallsPage.getAlphabet().get(letter).getText(), letter);
             defaultOperationsWithCountry(0, "Все страны");
-            worldwideCallsPage.getLetter().click();
+            clickOnLetterButton();
         }
     }
 
