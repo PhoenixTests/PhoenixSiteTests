@@ -1,11 +1,9 @@
 package mobileCommunication.mobileCommunication.services;
 
-import com.codeborne.selenide.Condition;
 import com.tngtech.junit.dataprovider.*;
 import common.CommonSteps;
 import io.qameta.allure.*;
 
-import mobileCommunication.mobileCommunication.rates.RatePage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -50,7 +48,7 @@ public class TestLabel {
     @Step("Проверка, закрылось ли нужное описание для услуги")
     public boolean checkBodyClose(String idBody)
     {
-        return servicePage.setBody(idBody).waitWhile(Condition.visible, 1000).isDisplayed();
+        return servicePage.waitBody(idBody, 1000).isDisplayed();
     }
 
     @Step("Нажатие на кнопку \"^\" для закрытия информации об услуге")
