@@ -17,6 +17,7 @@ defaultTasks 'clean', 'test'
 
 group 'org.phoenix'
 version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
 
 repositories {
     jcenter()
