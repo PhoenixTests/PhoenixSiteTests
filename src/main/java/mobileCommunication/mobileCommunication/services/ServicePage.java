@@ -1,5 +1,6 @@
 package mobileCommunication.mobileCommunication.services;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.*;
 
@@ -34,6 +35,10 @@ public class ServicePage {
     public SelenideElement setButton(String idButton){
         button = $(byId(idButton));
         return button;
+    }
+
+    public SelenideElement waitBody(String idBody, int timeout) {
+        return setBody(idBody).waitWhile(Condition.visible, timeout);
     }
 
 }
