@@ -16,7 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(DataProviderExtension.class)
 @Epic("Раздел «Звонки по всему миру»")
 @Feature("Тестирование выбора страны/спутниковой сети, просмотра тарификации")
-public class WorldwideCallsTest {
+public class WorldwideCallsTest extends DefaultWorldwideCallsSteps{
     private static WorldwideCallsPage worldwideCallsPage;
 
     @BeforeAll

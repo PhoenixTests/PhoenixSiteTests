@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DefaultWorldwideCallsSteps {
+public abstract class DefaultWorldwideCallsSteps {
     private static Random random=new Random();
 
     @Step("Нажать на подраздел «{unitName}»")
