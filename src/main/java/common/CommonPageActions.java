@@ -39,4 +39,12 @@ public class CommonPageActions {
     public static byte[] takeScreenshot() {
         return ((TakesScreenshot) WebDriverRunner.getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
+
+    public static void switchToFrame(SelenideElement frame) {
+        Selenide.switchTo().frame(frame);
+    }
+
+    public static void exitFromFrame() {
+        Selenide.switchTo().defaultContent();
+    }
 }
