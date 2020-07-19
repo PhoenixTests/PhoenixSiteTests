@@ -11,8 +11,7 @@ import static com.codeborne.selenide.Condition.visible;
 
 @Epic("Пользовательский интерфейс")
 @Feature("Тестирование пользовательского интерфейса")
-public class UserInterfaceTest {
-    private static RatePage ratePage;
+public class UserInterfaceTest extends DefaultRateSteps{
 
     @Step("Переход на страницу с подобранным тарифом")
     public void rateInfo() {
@@ -53,8 +52,8 @@ public class UserInterfaceTest {
     public void defaultSteps() {
         ratePage= new RatePage();
         CommonSteps.openPage(RatePage.getPageName(), RatePage.getURL());
-        DefaultRateSteps.changeRanges(ratePage,0,50,0,25);
-        DefaultRateSteps.getRateClick(ratePage);
+        changeRanges(0,50,0,25);
+        getRateClick();
     }
 
     @Test

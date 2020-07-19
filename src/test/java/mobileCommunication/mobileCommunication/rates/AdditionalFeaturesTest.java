@@ -3,7 +3,6 @@ package mobileCommunication.mobileCommunication.rates;
 import common.CommonPageActions;
 import common.CommonSteps;
 import io.qameta.allure.*;
-import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

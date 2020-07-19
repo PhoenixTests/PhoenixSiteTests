@@ -20,8 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(DataProviderExtension.class)
 @Epic("Тарифы")
 @Feature("Тестирование подбора тарифа и карусели тарифов")
-public class RateSelectionTest {
-    private static RatePage ratePage;
+public class RateSelectionTest extends DefaultRateSteps {
 
     @Step("Проверка на совпадение подобранного тарифа с {rateName}")
     public void checkRateName(String rateName) {
@@ -111,8 +110,8 @@ public class RateSelectionTest {
     @Severity(SeverityLevel.CRITICAL)
     public void shouldSelectCorrectRate(int calls, int gb, int sms, int rf, String rateName,
                                                int ratePrice, String rateTitle) {
-        DefaultRateSteps.changeRanges(ratePage, calls,gb,sms,rf);
-        DefaultRateSteps.getRateClick(ratePage);
+        changeRanges(calls,gb,sms,rf);
+        getRateClick();
         checkRateName(rateName);
         checkRatePrice(ratePrice);
         rateNameButtonClick();

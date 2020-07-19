@@ -2,11 +2,12 @@ package mobileCommunication.mobileCommunication.rates;
 
 import io.qameta.allure.Step;
 
-public class DefaultRateSteps {
+public abstract class DefaultRateSteps {
+    protected static RatePage ratePage;
 
     @Step("Установить значения ползунков: Звонки внутри сети - {calls}, Интернет - {gb}, " +
             "SMS - {sms}, Звонки в Россию - {rf}")
-    public static void changeRanges(RatePage ratePage, int calls, int gb, int sms, int rf) {
+    public void changeRanges(int calls, int gb, int sms, int rf) {
         ratePage.setCallsRangeVal(calls);
         ratePage.setGbRangeVal(gb);
         ratePage.setSmsRangeVal(sms);
@@ -14,7 +15,7 @@ public class DefaultRateSteps {
     }
 
     @Step("Нажать на кнопку 'Подобрать тариф'")
-    public static void getRateClick(RatePage ratePage) {
+    public void getRateClick() {
         ratePage.getRateSelection().click();
     }
 }
