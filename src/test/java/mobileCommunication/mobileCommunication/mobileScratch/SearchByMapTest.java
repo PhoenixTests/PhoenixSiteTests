@@ -2,10 +2,7 @@ package mobileCommunication.mobileCommunication.mobileScratch;
 
 import common.CommonPageActions;
 import common.CommonSteps;
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Step;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +11,8 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Epic("Раздел «Пополнение счета»")
+@Feature("Тестирование поиска по карте")
 public class SearchByMapTest extends DefaultMobileScratchSteps{
     @Step("Нажать на кнопку 'Найти ближайшую точку продажи'")
     public void clickOnClosestSalePointButton() {
