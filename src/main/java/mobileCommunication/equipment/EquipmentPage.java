@@ -1,11 +1,13 @@
 package mobileCommunication.equipment;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.tngtech.junit.dataprovider.DataProvider;
 import com.tngtech.junit.dataprovider.DataProviderExtension;
 import com.tngtech.junit.dataprovider.UseDataProviderExtension;
+import common.CommonPageActions;
 import lombok.*;
 
 import static com.codeborne.selenide.Selectors.*;
@@ -23,7 +25,7 @@ public class EquipmentPage {
     private ElementsCollection allButtonInformation;
     private SelenideElement buttonNext;
     private SelenideElement buttonBack;
-    private SelenideElement buttonCLoseProduct = $(byClassName("popup_closer"));
+    private SelenideElement buttonCLoseProduct;
     private SelenideElement buttonCLoseBuy = $(byAttribute("for","pupup_where_buy"));
     private SelenideElement buttonCLoseAdvertising = $(byAttribute("for", "popup_checkbox_greeting_internet"));
     private SelenideElement buttonBuy = $(byClassName("where-buy-btn"));
@@ -40,21 +42,24 @@ public class EquipmentPage {
         allButtonInformation = $$(byText("Подробнее"));
     }
 
-    public void setButtonNext(){
-        Selenide.switchTo().frame(0);
+    public void setButtonNext() {
         buttonNext = $(byClassName("carousel-control-next-icon"));
+    }
+
+    public void setButtonCLoseProduct() {
+        buttonCLoseProduct = $(byAttribute("for", "popup_card_page"));
     }
 
     public void setButtonBack() {
         buttonBack = $(byClassName("carousel-control-prev-icon"));
     }
 
-    public void setImgActive(){
-        imgActive = $(byClassName("carousel-item active"));
+    public void setImgActive() {
+        imgActive = $(byClassName("carousel-inner")).$$(byClassName("carousel-item")).find(Condition.attribute("class", "carousel-item active"));
     }
 
     public void setImgActiveNew(){
-        imgActiveNew = $(byClassName("carousel-item active"));
+        imgActiveNew = $(byClassName("carousel-inner")).$$(byClassName("carousel-item")).find(Condition.attribute("class", "carousel-item active"));
     }
 
 }

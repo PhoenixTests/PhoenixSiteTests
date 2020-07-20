@@ -22,11 +22,14 @@ public class CatalogTest {
     EquipmentPage equipmentPage = new EquipmentPage();
 
     public void cycleCatalog() {
-        for(int i = 1; i < equipmentPage.getAllButtonInformation().size(); i++) {
+        for(int i = 0; i < equipmentPage.getAllButtonInformation().size(); i++) {
             openInformation(i);
+            CommonSteps.switchFrame();
             equipmentPage.setButtonNext();
+            equipmentPage.setButtonBack();
             if (equipmentPage.getButtonNext().isDisplayed()){
                 leafImg();
+                backImg();
             }
             closeInformation(i);
         }
@@ -45,17 +48,29 @@ public class CatalogTest {
 
     @Step("Закрываем подробную информацию о продукте {0}")
     public void closeInformation(int index) {
+        CommonSteps.exitFrame();
+        equipmentPage.setButtonCLoseProduct();
         equipmentPage.getButtonCLoseProduct().click();
     }
 
     @Step("Смотрим следующую картинку")
     public void leafImg() {
         equipmentPage.setImgActive();
-        String firstImg = equipmentPage.getImgActive().attr("scr");
+        String firstImg = equipmentPage.getImgActive().innerHtml();
         equipmentPage.getButtonNext().click();
         equipmentPage.setImgActiveNew();
-        String secondImg = equipmentPage.getImgActiveNew().attr("scr");
-        assertEquals(false,firstImg.equals(secondImg));
+        String secondImg = equipmentPage.getImgActiveNew().innerHtml();
+       assertEquals(false, firstImg.equals(secondImg));
+    }
+
+    @Step("Смотрим предыдущую картинку")
+    public void backImg() {
+        equipmentPage.setImgActive();
+        String firstImg = equipmentPage.getImgActive().innerHtml();
+        equipmentPage.getButtonBack().click();
+        equipmentPage.setImgActiveNew();
+        String secondImg = equipmentPage.getImgActiveNew().innerHtml();
+        assertEquals(false, firstImg.equals(secondImg));
     }
 
     @Step("Закрываем рекламу")
@@ -68,6 +83,7 @@ public class CatalogTest {
     public void openInformation(int index) {
         equipmentPage.getAllButtonInformation().get(index).scrollTo();
         equipmentPage.getAllButtonInformation().get(index).click();
+        equipmentPage.setButtonCLoseProduct();
         assertEquals(true, equipmentPage.getButtonCLoseProduct().isDisplayed());
     }
 
@@ -88,7 +104,7 @@ public class CatalogTest {
     }
 
     @Step("Открываем страницу \"Маршрутизаторы/IPTV приставки\" кнопкой")
-    public void clicRouter(String URL) {
+    public void clickRouter(String URL) {
         equipmentPage.getButtonRouters().click();
         assertEquals(true, URL.equals(CommonPageActions.getCurrentURL()));
     }
@@ -98,6 +114,8 @@ public class CatalogTest {
         equipmentPage.getButtonSmartphone().click();
         assertEquals(true, URL.equals(CommonPageActions.getCurrentURL()));
     }
+
+
 
     @DataProvider
     public static Object[][] URL() {
@@ -109,13 +127,12 @@ public class CatalogTest {
         };
     }
 
-
+    @TestTemplate
+    @UseDataProvider("URL")
     @Feature("Товары")
     @DisplayName("Проверка товаров")
     @Description("Просмотр информации о каждом товаре")
     @Severity(SeverityLevel.NORMAL)
-    @TestTemplate
-    @UseDataProvider("URL")
     public void informationAboutProduct(String namePage, String URL) {
         CommonSteps.openPage(namePage, URL);
         closeAdvertising();
@@ -133,7 +150,7 @@ public class CatalogTest {
         closeAdvertising();
         clickModem(URL()[1][1].toString());
         whereBuy();
-        clicRouter(URL()[2][1].toString());
+        clickRouter(URL()[2][1].toString());
         whereBuy();
         clickSmartphone(URL()[0][1].toString());
         whereBuy();
