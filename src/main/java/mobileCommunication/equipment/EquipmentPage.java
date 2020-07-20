@@ -2,12 +2,7 @@ package mobileCommunication.equipment;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.tngtech.junit.dataprovider.DataProvider;
-import com.tngtech.junit.dataprovider.DataProviderExtension;
-import com.tngtech.junit.dataprovider.UseDataProviderExtension;
-import common.CommonPageActions;
 import lombok.*;
 
 import static com.codeborne.selenide.Selectors.*;
