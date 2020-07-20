@@ -35,14 +35,14 @@ public class WorldwideCallsPage {
     @ToString.Exclude
     private ElementsCollection countries=countriesTable.$$(By.tagName("tr"));
     private SelenideElement countryName;
-//    private SelenideElement countryImage;
-
 
     //all countries
     private SelenideElement abc=$(byId("abc"));
     @ToString.Exclude
     private ElementsCollection alphabet=abc.$$("a");
-    private SelenideElement letter=$(byClassName("letter"));
+    private SelenideElement letterButton=$(byClassName("letter"));
+    private SelenideElement letter;
+
 
     public void setCountries(int element) {
         ElementsCollection popularCountriesRowFromTable=countries.get(element).$$(By.tagName("td"));
@@ -50,10 +50,6 @@ public class WorldwideCallsPage {
             for (SelenideElement row : popularCountriesRowFromTable) {
                 if (!row.$(By.tagName("a")).$(By.tagName("img")).exists())
                     countryName = row.$(By.tagName("a"));
-//                if (row.$(By.tagName("a")).$(By.tagName("img")).exists())
-//                    countryImage = row.$(By.tagName("a"));
-//                else
-//                    countryName = row.$(By.tagName("a"));
             }
         }
     }
@@ -90,7 +86,8 @@ public class WorldwideCallsPage {
         cost.shouldNotBe(Condition.visible);
     }
 
-    public boolean checkCountryName(String selectedCountry) {
-        return countryName.has(Condition.text(selectedCountry));
+    public void setLetter(int letterNum) {
+        letter=alphabet.get(letterNum);
     }
+
 }
