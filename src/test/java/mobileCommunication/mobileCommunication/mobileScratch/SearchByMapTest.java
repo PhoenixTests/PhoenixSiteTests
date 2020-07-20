@@ -23,9 +23,13 @@ public class SearchByMapTest extends DefaultMobileScratchSteps{
     public String selectFromSalePointsTable() {
         mobileScratchPage.setByScratchAddresses(mobileScratchPage.getByScratchSelectCity().getSelectedValue());
         mobileScratchPage.setByScratchCitySalePoints();
-        return mobileScratchPage.getByScratchCitySalePoints()
-                .get(random.nextInt(mobileScratchPage.getByScratchCitySalePoints().size()))
-                .getText();
+        String address="јдрес:";
+        while(address.equals("јдрес:")) {
+            address= mobileScratchPage.getByScratchCitySalePoints()
+                    .get(random.nextInt(mobileScratchPage.getByScratchCitySalePoints().size()))
+                    .getText();
+        }
+        return address;
     }
 
     @Step("¬вести в поле адрес '{address}'")

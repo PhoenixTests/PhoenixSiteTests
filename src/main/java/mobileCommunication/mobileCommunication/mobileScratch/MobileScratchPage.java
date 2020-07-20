@@ -56,11 +56,11 @@ public class MobileScratchPage {
     }
 
     public boolean checkIsDisplayed(SelenideElement element){
-        return element.isDisplayed();
+        return element.waitWhile(Condition.not(Condition.visible), 1000).isDisplayed();
     }
 
     public boolean checkIsNotDisplayed(SelenideElement element){
-        return !element.waitWhile(Condition.visible, 1000).isDisplayed();
+        return !element.waitWhile(Condition.visible, 3000).isDisplayed();
     }
 
     public void setByPostAddresses(String cityValue) {
