@@ -1,4 +1,4 @@
-:DocName: Тест план
+:DocName: Страница Услуги тестплан
 :DocDescription: Тест план
 :ProjectName: Сайт Феникса
 :Version: 1.2

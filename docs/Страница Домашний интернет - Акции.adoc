@@ -1,4 +1,4 @@
-:DocName: Тест план
+:DocName: Страница Домашний интернет - Акции
 :DocDescription: Тест план
 :ProjectName: Сайт Феникса
 :Version: 1.2
