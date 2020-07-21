@@ -35,6 +35,7 @@ public class SetupPageTest {
                 {"?setup=1", "Windows XP"},
                 {"?setup=2", "Windows Vista"},
                 {"?setup=3", "Windows 7"},
+                {"?setup=4", "Windows 8"},
                 {"?setup=5", "Windows 10"},
                 {"?setup=6", "Mac OS"},
                 {"?setup=7", "Ubuntu"},
