@@ -47,8 +47,8 @@ public class SocialsTest {
     public static Object[] socials() {
         return new Object[] {
                 "https://vk.com/phoenix_071",
-                "https://www.instagram.com/rosphoenix071/",
                 "https://twitter.com/Phoenix__071",
+                "https://www.instagram.com/rosphoenix071/",
                 "mailto:Info@phoenix-dnr.ru"
         };
     }

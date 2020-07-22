@@ -2,8 +2,6 @@ package common;
 
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Selectors.byId;
-import static com.codeborne.selenide.Selenide.$;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommonSteps {
@@ -27,13 +25,23 @@ public class CommonSteps {
         assertEquals(url, CommonPageActions.getCurrentURL());
     }
 
-    @Step("Переход на открывшийся фрейм")
-    public static void switchFrame() {
-        CommonPageActions.switchToFrame($(byId("popup-iframe")));
-    }
+//    @Step("Переход на открывшийся фрейм")
+//    public static void switchFrame() {
+//        CommonPageActions.switchToFrame("popup-iframe");
+//    }
 
     @Step("Выход из фрейма")
     public static void exitFrame() {
         CommonPageActions.exitFromFrame();
     }
+
+//    @DataProvider
+//    public static Object[] browsers() {
+//        return new Object[] {
+//                "chrome",
+//                "opera",
+//                "firefox",
+//                "edge"
+//        };
+//    }
 }
