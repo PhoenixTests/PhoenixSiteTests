@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(UseDataProviderExtension.class)
 @ExtendWith(DataProviderExtension.class)
@@ -36,9 +36,11 @@ public class SocialsTest {
         CommonPageActions.closeCurrentTabAndReturnToMain();
     }
 
-    @Step("При проверка значка почты проверяем, открылось ли новая вкладка")
-    public void mailCheck() {
-        assertEquals(2, CommonPageActions.getCountOfOpenedWindows());
+    //    @Step("При проверке значка почты проверяем, открылось ли новая вкладка")
+    @Step("При проверке значка почты проверяем, в href значка есть mailto")
+    public void mailCheck(String url) {
+        assertTrue(url.startsWith("mailto:"));
+//        assertEquals(2, CommonPageActions.getCountOfOpenedWindows());
     }
 
     @DataProvider
@@ -65,13 +67,14 @@ public class SocialsTest {
     public void shouldRedirectToSocials(String url) {
         if (ratePage.getSocialIcon(url) != null) {
             scrollIntoView(url);
-            clickOnSocials(url);
-            CommonSteps.switchToAnotherWindow(1);
             if (url.equals("mailto:Info@phoenix-dnr.ru"))
-                mailCheck();
-            else
+                mailCheck(url);
+            else {
+                clickOnSocials(url);
+                CommonSteps.switchToAnotherWindow(1);
                 CommonSteps.checkIsCorrectUrl(url);
-            closeWindow();
+                closeWindow();
+            }
         }
     }
 }
