@@ -6,28 +6,23 @@ import com.tngtech.junit.dataprovider.UseDataProvider;
 import com.tngtech.junit.dataprovider.UseDataProviderExtension;
 import common.CommonSteps;
 import io.qameta.allure.*;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 
 @Epic("Поиск")
 @ExtendWith(UseDataProviderExtension.class)
 @ExtendWith(DataProviderExtension.class)
-public class SearchTest {
-
-    SearchPage searchPage = new SearchPage();
+public class SearchTest extends SearchSteps {
 
     @DataProvider
     public static Object[][] textForFind() {
-        return new Object[][] {
-                { "мобильная связь", "http://phoenix-dnr.ru/"},
-                { "тарифы", "http://phoenix-dnr.ru/rates/"},
-                { "услуги", "http://phoenix-dnr.ru/mobile-services.php"},
-                { "подключение", "http://phoenix-dnr.ru/mobile-connection.php"},
-                { "дополнительные смс", "http://phoenix-dnr.ru/sms-pack.php"},
-                { "пункты продаж", "http://phoenix-dnr.ru/mobile-sale.php"},
+        return new Object[][]{
+                {"мобильная связь", "http://phoenix-dnr.ru/"},
+                {"тарифы", "http://phoenix-dnr.ru/rates/"},
+                {"услуги", "http://phoenix-dnr.ru/mobile-services.php"},
+                {"подключение", "http://phoenix-dnr.ru/mobile-connection.php"},
+                {"дополнительные смс", "http://phoenix-dnr.ru/sms-pack.php"},
+                {"пункты продаж", "http://phoenix-dnr.ru/mobile-sale.php"},
                 { "где купить", "http://phoenix-dnr.ru/mobile-sale.php"},
                 { "позвонить в россию", "http://phoenix-dnr.ru/mobile-intl.php"},
                 { "новая зеландия", "http://phoenix-dnr.ru/world_cost/?type=all"},
@@ -54,15 +49,27 @@ public class SearchTest {
                 { "интернет для бизнеса", "http://phoenix-dnr.ru/business-internet.php"},
                 { "IP VPN", "http://phoenix-dnr.ru/business-ip-vpn.php"},
                 { "sip", "http://phoenix-dnr.ru/business-sip-telephony.php"},
-                { "ISDN PRI", "http://phoenix-dnr.ru/business-sip-telephony.php"},
-                { "корпоративная связь", "http://phoenix-dnr.ru/business-corporative.php"},
-                { "мобильный интернет для бизнеса", "http://phoenix-dnr.ru/business-mobile-internet.php"},
-                { "телеметрия", "http://phoenix-dnr.ru/business-mobile-telemetry.php"},
-                { "короткий номер", "http://phoenix-dnr.ru/business-short-number.php"},
-                { "новости", "http://phoenix-dnr.ru/news.php"},
-                { "о нас", "http://phoenix-dnr.ru/about.php"},
-                { "контакты", "http://phoenix-dnr.ru/contacts.php"},
+                {"ISDN PRI", "http://phoenix-dnr.ru/business-sip-telephony.php"},
+                {"корпоративная связь", "http://phoenix-dnr.ru/business-corporative.php"},
+                {"мобильный интернет для бизнеса", "http://phoenix-dnr.ru/business-mobile-internet.php"},
+                {"телеметрия", "http://phoenix-dnr.ru/business-mobile-telemetry.php"},
+                {"короткий номер", "http://phoenix-dnr.ru/business-short-number.php"},
+                {"новости", "http://phoenix-dnr.ru/news.php"},
+                {"о нас", "http://phoenix-dnr.ru/about.php"},
+                {"контакты", "http://phoenix-dnr.ru/contacts.php"},
         };
+    }
+
+    @BeforeAll
+    public static void openPage() {
+        CommonSteps.openPage(SearchPage.getNamePage(), SearchPage.getURL());
+        searchPage = new SearchPage();
+    }
+
+    @BeforeEach
+    public void clickOnSearchButton() {
+        SearchSteps.clickSearch();
+        SearchSteps.clickInput();
     }
 
     @TestTemplate
@@ -72,12 +79,9 @@ public class SearchTest {
     @Description("Ввод строки в поисковик с целью поиска раздела")
     @Severity(SeverityLevel.CRITICAL)
     public void findTest(String textFind, String URL) {
-        CommonSteps.openPage(searchPage.getNamePage(), searchPage.getURL());
-        SearchSteps.clickSearch(searchPage);
-        SearchSteps.clickInput(searchPage);
-        SearchSteps.textInput(searchPage,textFind + "\n");
-        SearchSteps.checkLink(searchPage, URL);
-        SearchSteps.clickLink(searchPage);
+        SearchSteps.textInput(textFind + "\n");
+        SearchSteps.checkLink(URL);
+        SearchSteps.clickLink();
     }
 
     @Test
@@ -86,32 +90,29 @@ public class SearchTest {
     @Description("Открытие статистики и переход по ссылке")
     @Severity(SeverityLevel.NORMAL)
     public void statistics() {
-        CommonSteps.openPage(searchPage.getNamePage(), searchPage.getURL());
-        SearchSteps.clickSearch(searchPage);
-        SearchSteps.clickInput(searchPage);
-        SearchSteps.textInput(searchPage,textForFind()[39][0].toString() + "\n");
-        SearchSteps.checkLink(searchPage,textForFind()[39][1].toString());
-        SearchSteps.clickStatistics(searchPage);
+        SearchSteps.textInput(textForFind()[39][0].toString() + "\n");
+        SearchSteps.checkLink(textForFind()[39][1].toString());
+        SearchSteps.clickStatistics();
         CommonSteps.switchToAnotherWindow(1);
-        SearchSteps.clickLinkWebsite(searchPage);
-        CommonSteps.switchToAnotherWindow(2);
-        SearchSteps.checkWebsite(searchPage);
+        SearchSteps.clickLinkWebsite();
+        SearchSteps.closeWebsite();
+        CommonSteps.switchToAnotherWindow(1);
+        SearchSteps.checkWebsite();
     }
 
-    @Test
-    @Feature("Статистика")
-    @DisplayName("Закрытие статистики")
-    @Description("Открытие статистики и закрытие кнопкой")
-    @Severity(SeverityLevel.NORMAL)
-    public void statisticsClose() {
-        CommonSteps.openPage(searchPage.getNamePage(), searchPage.getURL());
-        SearchSteps.clickSearch(searchPage);
-        SearchSteps.clickInput(searchPage);
-        SearchSteps.textInput(searchPage,textForFind()[39][0].toString() + "\n");
-        SearchSteps.checkLink(searchPage, textForFind()[39][1].toString());
-        SearchSteps.clickStatistics(searchPage);
-        CommonSteps.switchToAnotherWindow(1);
-        SearchSteps.closeWebsite(searchPage);
-    }
+//    @Test
+//    @Feature("Статистика")
+//    @DisplayName("Закрытие статистики")
+//    @Description("Открытие статистики и закрытие кнопкой")
+//    public void statisticsClose() {
+//        CommonSteps.openPage(SearchPage.getNamePage(), SearchPage.getURL());
+//        SearchSteps.clickSearch(searchPage);
+//        SearchSteps.clickInput(searchPage);
+//        SearchSteps.textInput(searchPage,textForFind()[39][0].toString() + "\n");
+//        SearchSteps.checkLink(searchPage, textForFind()[39][1].toString());
+//        SearchSteps.clickStatistics(searchPage);
+//        CommonSteps.switchToAnotherWindow(1);
+//        SearchSteps.closeWebsite(searchPage);
+//    }
 
 }
