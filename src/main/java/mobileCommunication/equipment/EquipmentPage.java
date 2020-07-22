@@ -3,7 +3,8 @@ package mobileCommunication.equipment;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -29,7 +30,7 @@ public class EquipmentPage {
     private SelenideElement buttonRouters = $(byId("third-tab-btn"));
     private SelenideElement imgActive;
     private SelenideElement imgActiveNew;
-
+    private SelenideElement framePopup = $(byId("popup-iframe"));
     //method
 
     //search for a product catalog on a page

@@ -95,7 +95,7 @@ public class EquipmentSteps {
     public static void cycleCatalog() {
         for(int i = 0; i < equipmentPage.getAllButtonInformation().size(); i++) {
             EquipmentSteps.openInformation(i);
-            CommonSteps.switchFrame();
+            CommonPageActions.switchToFrame(equipmentPage.getFramePopup());
             equipmentPage.setButtonNext();
             equipmentPage.setButtonBack();
             if (equipmentPage.getButtonNext().isDisplayed()){
