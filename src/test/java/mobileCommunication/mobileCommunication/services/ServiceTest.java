@@ -1,18 +1,21 @@
 package mobileCommunication.mobileCommunication.services;
 
-import com.tngtech.junit.dataprovider.*;
+import com.tngtech.junit.dataprovider.DataProvider;
+import com.tngtech.junit.dataprovider.DataProviderExtension;
+import com.tngtech.junit.dataprovider.UseDataProvider;
+import com.tngtech.junit.dataprovider.UseDataProviderExtension;
 import common.CommonSteps;
 import io.qameta.allure.*;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(UseDataProviderExtension.class)
 @ExtendWith(DataProviderExtension.class)
-public class TestLabel {
+public class ServiceTest {
 
     private ServicePage servicePage = new ServicePage();
 
@@ -65,11 +68,11 @@ public class TestLabel {
     @Description("Тест на просмотр информации по каждой услуге нажатием на название")
     @Severity(SeverityLevel.NORMAL)
     public void label(String nameLabel, String idBody, String idButton){
-        CommonSteps.openPage(servicePage.getPageName(), servicePage.getURL());
+        CommonSteps.openPage(ServicePage.getPageName(), ServicePage.getURL());
         clickLabel(nameLabel);
-        assertEquals(true, checkBodyOpen(idBody));
+        assertTrue(checkBodyOpen(idBody));
         clickButton(idButton);
-        assertEquals(false, checkBodyClose(idBody));
+        assertFalse(checkBodyClose(idBody));
     }
 
 }

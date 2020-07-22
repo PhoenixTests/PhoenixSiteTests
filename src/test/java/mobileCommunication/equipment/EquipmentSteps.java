@@ -6,7 +6,7 @@ import common.CommonSteps;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(UseDataProviderExtension.class)
 public class EquipmentSteps {
@@ -32,7 +32,7 @@ public class EquipmentSteps {
         equipmentPage.getButtonNext().click();
         equipmentPage.setImgActiveNew();
         String secondImg = equipmentPage.getImgActiveNew().innerHtml();
-        assertEquals(false, firstImg.equals(secondImg));
+        assertNotEquals(firstImg, secondImg);
     }
 
     @Step("Смотрим предыдущую картинку")
@@ -42,7 +42,7 @@ public class EquipmentSteps {
         equipmentPage.getButtonBack().click();
         equipmentPage.setImgActiveNew();
         String secondImg = equipmentPage.getImgActiveNew().innerHtml();
-        assertEquals(false, firstImg.equals(secondImg));
+        assertNotEquals(firstImg, secondImg);
     }
 
     @Step("Закрываем рекламу")
@@ -56,7 +56,7 @@ public class EquipmentSteps {
         equipmentPage.getAllButtonInformation().get(index).scrollTo();
         equipmentPage.getAllButtonInformation().get(index).click();
         equipmentPage.setButtonCLoseProduct();
-        assertEquals(true, equipmentPage.getButtonCLoseProduct().isDisplayed());
+        assertTrue(equipmentPage.getButtonCLoseProduct().isDisplayed());
     }
 
     @Step("Нажимаем на кнопку\"Где купить?\"")
@@ -72,19 +72,19 @@ public class EquipmentSteps {
     @Step("Открываем страницу \"3G/4G модемы\" кнопкой")
     public static void clickModem(String URL) {
         equipmentPage.getButtonModem().click();
-        assertEquals(true, URL.equals(CommonPageActions.getCurrentURL()));
+        assertEquals(URL, CommonPageActions.getCurrentURL());
     }
 
     @Step("Открываем страницу \"Маршрутизаторы/IPTV приставки\" кнопкой")
     public static void clickRouter(String URL) {
         equipmentPage.getButtonRouters().click();
-        assertEquals(true, URL.equals(CommonPageActions.getCurrentURL()));
+        assertEquals(URL, CommonPageActions.getCurrentURL());
     }
 
     @Step("Открываем страницу \"Мобильные телефоны\" кнопкой")
     public static void clickSmartphone(String URL) {
         equipmentPage.getButtonSmartphone().click();
-        assertEquals(true, URL.equals(CommonPageActions.getCurrentURL()));
+        assertEquals(URL, CommonPageActions.getCurrentURL());
     }
 
     public static void whereBuy() {

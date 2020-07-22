@@ -1,9 +1,11 @@
-package homeInternet.ñonnections.stocks;
+package internet.connections.stocks;
 
 import com.codeborne.selenide.SelenideElement;
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
 
-import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selectors.byAttribute;
+import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.$;
 
 @Data

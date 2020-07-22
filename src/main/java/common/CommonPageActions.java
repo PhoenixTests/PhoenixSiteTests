@@ -1,6 +1,5 @@
 package common;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
@@ -9,8 +8,8 @@ import org.openqa.selenium.TakesScreenshot;
 
 public class CommonPageActions {
     public static void openPage(String URL) {
-        Configuration.browser = "edge";
-        System.setProperty("selenide.browser", "edge");
+//        Configuration.browser = "edge";
+//        System.setProperty("selenide.browser", "edge");
         Selenide.open(URL);
     }
 
