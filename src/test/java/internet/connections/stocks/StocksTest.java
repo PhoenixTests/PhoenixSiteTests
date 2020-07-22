@@ -1,4 +1,4 @@
-package homeInternet.ñonnections.stocks;
+package internet.connections.stocks;
 
 import com.tngtech.junit.dataprovider.DataProvider;
 import com.tngtech.junit.dataprovider.DataProviderExtension;
@@ -10,7 +10,6 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -36,7 +35,7 @@ public class StocksTest {
     @UseDataProvider("stocksInformation")
     @Severity(SeverityLevel.CRITICAL)
     public void stocks(String nameStocks, String URLPage, int key) {
-        CommonSteps.openPage(stocksPage.getPageName(), stocksPage.getURL());
+        CommonSteps.openPage(StocksPage.getPageName(), StocksPage.getURL());
         StocksSteps.clickButtonFriends(stocksPage, key);
         CommonSteps.checkIsCorrectUrl(URLPage);
         StocksSteps.clickButtonConnect(stocksPage);

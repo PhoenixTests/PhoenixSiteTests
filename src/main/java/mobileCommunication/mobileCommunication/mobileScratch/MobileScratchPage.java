@@ -46,10 +46,10 @@ public class MobileScratchPage {
 
     private SelenideElement mapFrame=$(byAttribute("src", "mobile-scratch-map.php"));
     private SelenideElement userAddress=$(byId("useradress"));
-    private SelenideElement findOnMapButton=$(byClassName("button"));
+    private SelenideElement findOnMapButton = $(byClassName("button"));
     @Getter(AccessLevel.NONE)
-    private SelenideElement map=$(byId("map")).$(byClassName("ymaps-2-1-76-map"));
-    private SelenideElement mapCloser=$(byClassName("popup_closer"));
+    private SelenideElement map = $(byId("map")).$(byClassName("ymaps-2-1-77-map"));
+    private SelenideElement mapCloser = $(byClassName("popup_closer"));
 
     public SelenideElement getMap() {
         return map.waitUntil(Condition.visible, 1000);

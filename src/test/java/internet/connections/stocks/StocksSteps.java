@@ -1,8 +1,8 @@
-package homeInternet.сonnections.stocks;
+package internet.connections.stocks;
 
 import io.qameta.allure.Step;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StocksSteps {
 
@@ -35,7 +35,7 @@ public class StocksSteps {
 
     @Step("Проверка, открылось ли окно заявки")
     public static void checkWindow(StocksPage stocksPage) {
-        assertEquals(true, stocksPage.getButtonClose().isDisplayed());
+        assertTrue(stocksPage.getButtonClose().isDisplayed());
     }
 
     @Step("Закрываем окно заявки")

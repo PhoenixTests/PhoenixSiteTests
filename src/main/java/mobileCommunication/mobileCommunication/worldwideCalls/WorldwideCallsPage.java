@@ -59,7 +59,7 @@ public class WorldwideCallsPage {
     }
 
     public SelenideElement setOperatorCodeLabel() {
-        operatorCodeLabel=$(byName("selectCode")).$(byText("Код оператора:")).waitUntil(Condition.appear, 2000);
+        operatorCodeLabel = $(byName("selectCode")).$(byText("Код оператора:")).waitUntil(Condition.appear, 2500);
         return operatorCodeLabel;
     }
 
