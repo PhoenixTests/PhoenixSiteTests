@@ -51,7 +51,7 @@ public class ServiceTest {
     @Step("Проверка, закрылось ли нужное описание для услуги")
     public boolean checkBodyClose(String idBody)
     {
-        return servicePage.waitBody(idBody, 1000).isDisplayed();
+        return servicePage.waitBody(idBody, 1500).isDisplayed();
     }
 
     @Step("Нажатие на кнопку \"^\" для закрытия информации об услуге")
