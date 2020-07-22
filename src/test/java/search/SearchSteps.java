@@ -17,12 +17,12 @@ public class SearchSteps {
         searchPage.getInputSearch().click();
     }
 
-    @Step("¬вод текст - \"{0}\" и осуществл€ем поиск")
+    @Step("¬вод текст - \"{1}\" и осуществл€ем поиск")
     public static void textInput(SearchPage searchPage, String text) {
         searchPage.getInputSearch().setValue(text);
     }
 
-    @Step("»щем среди найденных результатов ссылку - \"{0}\" на нужный раздел")
+    @Step("»щем среди найденных результатов ссылку - \"{1}\" на нужный раздел")
     public static void checkLink(SearchPage searchPage, String text) {
         searchPage.setLinkFind(text);
         assertEquals(true, searchPage.getLinkFind().exists());
