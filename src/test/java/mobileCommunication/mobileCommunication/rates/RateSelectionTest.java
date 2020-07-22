@@ -8,7 +8,6 @@ import common.CommonPageActions;
 import common.CommonSteps;
 import io.qameta.allure.*;
 import jdk.jfr.Description;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestTemplate;
@@ -68,24 +67,24 @@ public class RateSelectionTest extends DefaultRateSteps {
     }
 
     @BeforeAll
-    public static void openPage(){
+    public static void openPage() {
         ratePage = new RatePage();
         CommonSteps.openPage(RatePage.getPageName(), RatePage.getURL());
     }
 
-    @AfterEach
-    public void returnBack() {
-        CommonSteps.returnBack();
-    }
+//    @AfterEach
+//    public void returnBack() {
+//        CommonSteps.returnBack();
+//    }
 
     @DataProvider
     public static Object[][] rateInfo() {
         return new Object[][]{
                 {0, 99, 0, 99, "«Без границ»", 300, "Тариф «БЕЗ ГРАНИЦ»"},
-                {99,99,99,0, "«Комфортный»", 230, "Тариф «КОМФОРТНЫЙ»"},
-                {99,50,50,0, "«Удобный»",150, "Тариф «УДОБНЫЙ»"},
-                {0,50,0,0, "«Народный интернет»", 95, "Народный интернет тариф"},
-                {0,0,0,0,"«Народный»",50,"Народный Тариф"}
+                {99, 99, 99, 0, "«Комфортный»", 230, "Тариф «КОМФОРТНЫЙ»"},
+                {99, 50, 50, 0, "«Удобный»", 150, "Тариф «УДОБНЫЙ»"},
+                {0, 50, 0, 0, "«Народный интернет»", 95, "Народный интернет тариф"},
+                {0, 0, 0, 0, "«Народный»", 50, "Народный Тариф"}
         };
     }
 
@@ -116,6 +115,7 @@ public class RateSelectionTest extends DefaultRateSteps {
         checkRatePrice(ratePrice);
         rateNameButtonClick();
         checkPageTitle(rateTitle);
+        CommonSteps.returnBack();
     }
 
     @TestTemplate
@@ -128,6 +128,7 @@ public class RateSelectionTest extends DefaultRateSteps {
         forwardButtonClick(rateName);
         carouselRateButtonClick();
         checkPageTitle(rateTitle);
+        CommonSteps.returnBack();
     }
 
     @TestTemplate
@@ -140,5 +141,6 @@ public class RateSelectionTest extends DefaultRateSteps {
         backwardButtonClick(rateName);
         carouselRateButtonClick();
         checkPageTitle(rateTitle);
+        CommonSteps.returnBack();
     }
 }
