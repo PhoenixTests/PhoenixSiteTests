@@ -1,10 +1,10 @@
 package search;
 
-import com.codeborne.selenide.WebDriverRunner;
 import com.tngtech.junit.dataprovider.DataProvider;
 import com.tngtech.junit.dataprovider.DataProviderExtension;
 import com.tngtech.junit.dataprovider.UseDataProvider;
 import com.tngtech.junit.dataprovider.UseDataProviderExtension;
+import common.CommonPageActions;
 import common.CommonSteps;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
@@ -99,12 +99,12 @@ public class SearchTest extends SearchSteps {
         SearchSteps.closeWebsite();
         CommonSteps.switchToAnotherWindow(1);
         SearchSteps.checkWebsite();
+        CommonPageActions.closeCurrentTab();
     }
 
     @AfterAll
     public static void closePage() {
-        if (WebDriverRunner.getWebDriver() != null)
-            WebDriverRunner.getWebDriver().close();
+        CommonPageActions.closeCurrentTab();
     }
 
 //    @Test
