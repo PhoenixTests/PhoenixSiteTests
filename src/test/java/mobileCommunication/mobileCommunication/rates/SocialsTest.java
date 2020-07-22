@@ -33,7 +33,8 @@ public class SocialsTest {
 
     @Step("Закрыть вкладку с соцсетью")
     public void closeWindow() {
-        CommonPageActions.closeCurrentTabAndReturnToMain();
+        CommonPageActions.closeCurrentTab();
+        CommonPageActions.returnToMain();
     }
 
     //    @Step("При проверке значка почты проверяем, открылось ли новая вкладка")

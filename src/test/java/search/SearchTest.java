@@ -1,5 +1,6 @@
 package search;
 
+import com.codeborne.selenide.WebDriverRunner;
 import com.tngtech.junit.dataprovider.DataProvider;
 import com.tngtech.junit.dataprovider.DataProviderExtension;
 import com.tngtech.junit.dataprovider.UseDataProvider;
@@ -98,6 +99,12 @@ public class SearchTest extends SearchSteps {
         SearchSteps.closeWebsite();
         CommonSteps.switchToAnotherWindow(1);
         SearchSteps.checkWebsite();
+    }
+
+    @AfterAll
+    public static void closePage() {
+        if (WebDriverRunner.getWebDriver() != null)
+            WebDriverRunner.getWebDriver().close();
     }
 
 //    @Test

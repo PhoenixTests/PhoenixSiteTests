@@ -24,7 +24,8 @@ public class AdditionalFeaturesTest {
 
     @Step("Закрыть вкладку Личного кабинета")
     public void closeWindow() {
-        CommonPageActions.closeCurrentTabAndReturnToMain();
+        CommonPageActions.closeCurrentTab();
+        CommonPageActions.returnToMain();
     }
 
     @BeforeAll

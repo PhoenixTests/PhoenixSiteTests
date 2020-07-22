@@ -1,10 +1,11 @@
 package search;
 
 import com.codeborne.selenide.SelenideElement;
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selectors.*;
+import static com.codeborne.selenide.Selenide.$;
 
 @Data
 public class SearchPage {
@@ -23,8 +24,8 @@ public class SearchPage {
     private SelenideElement exceptionSite = $(byText("403 Forbidden"));
     private SelenideElement buttonClose = $(byText("Закрыть"));
 
-    public SelenideElement setLinkFind(String text) {
-        return linkFind = $(byText(text));
+    public void setLinkFind(String text) {
+        linkFind = $(byText(text));
     }
 
 }

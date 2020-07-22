@@ -9,8 +9,8 @@ import org.openqa.selenium.TakesScreenshot;
 
 public class CommonPageActions {
     public static void openPage(String URL) {
-        Configuration.browser = "firefox";
-        System.setProperty("selenide.browser", "firefox");
+        Configuration.browser = "chrome";
+        System.setProperty("selenide.browser", "chrome");
         Selenide.open(URL);
     }
 
@@ -23,12 +23,15 @@ public class CommonPageActions {
     }
 
     public static String getCurrentURL() {
-        while (WebDriverRunner.url().equals("about:blank"));
+        while (WebDriverRunner.url().equals("about:blank")) ;
         return WebDriverRunner.getWebDriver().getCurrentUrl();
     }
 
-    public static void closeCurrentTabAndReturnToMain() {
+    public static void closeCurrentTab() {
         Selenide.closeWindow();
+    }
+
+    public static void returnToMain() {
         Selenide.switchTo().window(0);
     }
 
