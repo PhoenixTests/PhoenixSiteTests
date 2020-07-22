@@ -50,7 +50,7 @@ public class MobileScratchPage {
     private SelenideElement mapCloser = $(byClassName("popup_closer"));
 
     public SelenideElement getMap() {
-        return map.waitUntil(Condition.visible, 3500);
+        return map.waitUntil(Condition.visible, 5000);
     }
 
     public boolean checkIsDisplayed(SelenideElement element){
