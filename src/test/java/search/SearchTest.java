@@ -5,9 +5,7 @@ import com.tngtech.junit.dataprovider.DataProviderExtension;
 import com.tngtech.junit.dataprovider.UseDataProvider;
 import com.tngtech.junit.dataprovider.UseDataProviderExtension;
 import common.CommonSteps;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestTemplate;
@@ -72,6 +70,7 @@ public class SearchTest {
     @Feature("Поиск разделов")
     @DisplayName("Поиск")
     @Description("Ввод строки в поисковик с целью поиска раздела")
+    @Severity(SeverityLevel.CRITICAL)
     public void findTest(String textFind, String URL) {
         CommonSteps.openPage(searchPage.getNamePage(), searchPage.getURL());
         SearchSteps.clickSearch(searchPage);
@@ -85,6 +84,7 @@ public class SearchTest {
     @Feature("Статистика")
     @DisplayName("Просмотр статистики")
     @Description("Открытие статистики и переход по ссылке")
+    @Severity(SeverityLevel.NORMAL)
     public void statistics() {
         CommonSteps.openPage(searchPage.getNamePage(), searchPage.getURL());
         SearchSteps.clickSearch(searchPage);
@@ -102,6 +102,7 @@ public class SearchTest {
     @Feature("Статистика")
     @DisplayName("Закрытие статистики")
     @Description("Открытие статистики и закрытие кнопкой")
+    @Severity(SeverityLevel.NORMAL)
     public void statisticsClose() {
         CommonSteps.openPage(searchPage.getNamePage(), searchPage.getURL());
         SearchSteps.clickSearch(searchPage);
