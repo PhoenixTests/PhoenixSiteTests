@@ -1,8 +1,11 @@
 package search;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Data;
 import lombok.Getter;
+import lombok.SneakyThrows;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -26,6 +29,11 @@ public class SearchPage {
 
     public void setLinkFind(String text) {
         linkFind = $(byText(text));
+    }
+
+    @SneakyThrows
+    public void waitLinks(int milliseconds) {
+        linkFind.waitUntil(Condition.exist, milliseconds);
     }
 
 }
