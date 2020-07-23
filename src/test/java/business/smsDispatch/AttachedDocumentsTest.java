@@ -65,7 +65,7 @@ public class AttachedDocumentsTest {
         return null;
     }
 
-    @Step("Проверить, что был скачан именно '{docName}'")
+    @Step("Проверить, что был скачан именно '{docNameExpected}'")
     public void cheIsDocNameAsExpected(String docNameExpected, String docNameActual) {
         try {
             assertEquals(docNameExpected, URLDecoder.decode(docNameActual, "UTF-8"));
@@ -106,7 +106,10 @@ public class AttachedDocumentsTest {
         cheIsDocNameAsExpected("ЗАЯВКА НА СМС-рассылку ДЛЯ ЮРИДИЧЕСКИХ ЛИЦ.pdf", request.getName());
         clickOnLink();
         CommonPageActions.switchToAnotherWindow(1);
-        CommonSteps.checkIsCorrectUrl("http://phoenix-dnr.ru/documents/%D0%A1%D0%9C%D0%A1-%D1%80%D0%B0%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D0%B0/%D0%97%D0%90%D0%AF%D0%92%D0%9A%D0%90%20%D0%9D%D0%90%20%D0%A1%D0%9C%D0%A1-%D1%80%D0%B0%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D1%83%20%D0%94%D0%9B%D0%AF%20%D0%AE%D0%A0%D0%98%D0%94%D0%98%D0%A7%D0%95%D0%A1%D0%9A%D0%98%D0%A5%20%D0%9B%D0%98%D0%A6.pdf");
+        CommonSteps.checkIsCorrectUrl("http://phoenix-dnr.ru/documents/%D0%A1%D0%9C%D0%A1-%D1%80%D0%B0%D1%81%D1%81%D" +
+                "1%8B%D0%BB%D0%BA%D0%B0/%D0%97%D0%90%D0%AF%D0%92%D0%9A%D0%90%20%D0%9D%D0%90%20%D0%A1%D0%9C%D0%A1-%D1" +
+                "%80%D0%B0%D1%81%D1%81%D1%8B%D0%BB%D0%BA%D1%83%20%D0%94%D0%9B%D0%AF%20%D0%AE%D0%A0%D0%98%D0%94%D0%98" +
+                "%D0%A7%D0%95%D0%A1%D0%9A%D0%98%D0%A5%20%D0%9B%D0%98%D0%A6.pdf");
         CommonPageActions.closeCurrentTab();
         CommonPageActions.returnToMain();
     }
