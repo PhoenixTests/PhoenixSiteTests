@@ -37,11 +37,9 @@ public class SocialsTest {
         CommonPageActions.returnToMain();
     }
 
-    //    @Step("При проверке значка почты проверяем, открылось ли новая вкладка")
     @Step("При проверке значка почты проверяем, в href значка есть mailto")
     public void mailCheck(String url) {
         assertTrue(url.startsWith("mailto:"));
-//        assertEquals(2, CommonPageActions.getCountOfOpenedWindows());
     }
 
     @DataProvider
