@@ -1,5 +1,6 @@
 package internet.connections.stocks;
 
+import common.CommonPageActions;
 import io.qameta.allure.Step;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,15 +12,15 @@ public abstract class StocksSteps {
     public static void clickButtonFriends(String stockName, int key) {
         switch (key) {
             case 0:
-                stocksPage.getButtonFriends().scrollTo();
+                CommonPageActions.scrollIntoView(stocksPage.getButtonFriends());
                 stocksPage.getButtonFriends().click();
                 break;
             case 1:
-                stocksPage.getButtonRate().scrollTo();
+                CommonPageActions.scrollIntoView(stocksPage.getButtonRate());
                 stocksPage.getButtonRate().click();
                 break;
             case 2:
-                stocksPage.getButtonHundred().scrollTo();
+                CommonPageActions.scrollIntoView(stocksPage.getButtonHundred());
                 stocksPage.getButtonHundred().click();
                 break;
         }
