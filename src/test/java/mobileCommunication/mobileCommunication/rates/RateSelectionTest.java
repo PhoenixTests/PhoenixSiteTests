@@ -72,11 +72,6 @@ public class RateSelectionTest extends DefaultRateSteps {
         CommonSteps.openPage(RatePage.getPageName(), RatePage.getURL());
     }
 
-//    @AfterEach
-//    public void returnBack() {
-//        CommonSteps.returnBack();
-//    }
-
     @DataProvider
     public static Object[][] rateInfo() {
         return new Object[][]{

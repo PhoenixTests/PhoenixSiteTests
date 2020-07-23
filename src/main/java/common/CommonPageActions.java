@@ -9,8 +9,8 @@ import org.openqa.selenium.TakesScreenshot;
 
 public class CommonPageActions {
     public static void openPage(String URL) {
-        Configuration.browser = "opera";
-        System.setProperty("selenide.browser", "opera");
+        Configuration.browser = "edge";
+        System.setProperty("selenide.browser", "edge");
         Selenide.open(URL);
     }
 

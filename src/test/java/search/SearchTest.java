@@ -86,8 +86,8 @@ public class SearchTest extends SearchSteps {
     @Severity(SeverityLevel.CRITICAL)
     public void findTest(String textFind, String URL) {
         SearchSteps.textInput(textFind + "\n");
-        SearchSteps.checkLink(URL);
         takeScreenshot();
+        SearchSteps.checkLink(URL);
     }
 
     @Test

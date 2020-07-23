@@ -25,23 +25,8 @@ public class CommonSteps {
         assertEquals(url, CommonPageActions.getCurrentURL());
     }
 
-//    @Step("Переход на открывшийся фрейм")
-//    public static void switchFrame() {
-//        CommonPageActions.switchToFrame("popup-iframe");
-//    }
-
     @Step("Выход из фрейма")
     public static void exitFrame() {
         CommonPageActions.exitFromFrame();
     }
-
-//    @DataProvider
-//    public static Object[] browsers() {
-//        return new Object[] {
-//                "chrome",
-//                "opera",
-//                "firefox",
-//                "edge"
-//        };
-//    }
 }
