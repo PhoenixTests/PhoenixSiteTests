@@ -4,12 +4,12 @@ import io.qameta.allure.Step;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class StocksSteps {
+public abstract class StocksSteps {
+    protected static StocksPage stocksPage;
 
-    @Step("Нажать на кнопку акции")
-    public static void clickButtonFriends(StocksPage stocksPage, int key) {
-        switch (key)
-        {
+    @Step("Нажать на кнопку акции {stockName}")
+    public static void clickButtonFriends(String stockName, int key) {
+        switch (key) {
             case 0:
                 stocksPage.getButtonFriends().scrollTo();
                 stocksPage.getButtonFriends().click();
@@ -26,20 +26,20 @@ public class StocksSteps {
     }
 
     @Step("Нажать на кнопку «ПОДКЛЮЧИТЬ»")
-    public static void clickButtonConnect(StocksPage stocksPage) {
-        if(stocksPage.getButtonConnect().exists())
+    public static void clickButtonConnect() {
+        if (stocksPage.getButtonConnect().exists())
             stocksPage.getButtonConnect().click();
         else
             stocksPage.getButtonConnect2().click();
     }
 
     @Step("Проверка, открылось ли окно заявки")
-    public static void checkWindow(StocksPage stocksPage) {
+    public static void checkWindow() {
         assertTrue(stocksPage.getButtonClose().isDisplayed());
     }
 
     @Step("Закрываем окно заявки")
-    public static void clickClose(StocksPage stocksPage) {
+    public static void clickClose() {
         stocksPage.getButtonClose().click();
     }
 
