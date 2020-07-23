@@ -2,6 +2,9 @@ package common;
 
 import io.qameta.allure.Step;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommonSteps {
@@ -22,7 +25,12 @@ public class CommonSteps {
 
     @Step("Сравнение url только что открытой вкладки с {url}")
     public static void checkIsCorrectUrl(String url) {
-        assertEquals(url, CommonPageActions.getCurrentURL());
+        try {
+            String currentURL = CommonPageActions.getCurrentURL();
+            assertEquals(URLDecoder.decode(url, "UTF-8"), URLDecoder.decode(currentURL, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     @Step("Выход из фрейма")
