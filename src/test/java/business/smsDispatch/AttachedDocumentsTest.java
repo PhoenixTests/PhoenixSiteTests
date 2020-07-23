@@ -77,6 +77,7 @@ public class AttachedDocumentsTest {
     @Step("Закрыть окно рекламы")
     public static void closeAdvertisingPopup() {
         smsDispatchPage.getCloseAdvertisingButton().click();
+        smsDispatchPage.waitWhile();
     }
 
     @BeforeAll
