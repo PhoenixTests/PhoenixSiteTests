@@ -31,7 +31,6 @@ public class SearchPage {
         linkFind = $(byText(text));
     }
 
-    @SneakyThrows
     public void waitLinks(int milliseconds) {
         linkFind.waitUntil(Condition.exist, milliseconds);
     }
