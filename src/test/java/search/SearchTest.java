@@ -82,7 +82,7 @@ public class SearchTest extends SearchSteps {
     public void findTest(String textFind, String URL) {
         SearchSteps.textInput(textFind + "\n");
         SearchSteps.checkLink(URL);
-        SearchSteps.clickLink();
+        SearchSteps.clickLink(URL);
     }
 
     @Test
