@@ -1,9 +1,9 @@
 package search;
 
+import common.CommonSteps;
 import io.qameta.allure.Step;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class SearchSteps {
     protected static SearchPage searchPage;
@@ -31,8 +31,9 @@ public abstract class SearchSteps {
     }
 
     @Step("Переходим по найденной ссылке")
-    public static void clickLink() {
+    public static void clickLink(String URl) {
         searchPage.getLinkFind().click();
+        CommonSteps.checkIsCorrectUrl(URl);
     }
 
     @Step("Открываем окно статистики")
