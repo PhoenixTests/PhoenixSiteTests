@@ -13,17 +13,17 @@ public abstract class SearchSteps {
         searchPage.getButtonSearch().click();
     }
 
-    @Step("Ставим курсор на поле ввода")
+    @Step("Ставим курсор в поле ввода")
     public static void clickInput() {
         searchPage.getInputSearch().click();
     }
 
-    @Step("Ввод текст - \"{0}\" и осуществляем поиск")
+    @Step("Ввод текста \"{0}\" и осуществляем поиск")
     public static void textInput(String text) {
         searchPage.getInputSearch().setValue(text);
     }
 
-    @Step("Ищем среди найденных результатов ссылку - \"{0}\" на нужный раздел")
+    @Step("Ищем среди найденных результатов ссылку \"{0}\" на нужный раздел")
     public static void checkLink(String text) {
         searchPage.setLinkFind(text);
         searchPage.waitLinks(700);
