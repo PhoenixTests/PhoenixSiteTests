@@ -6,7 +6,8 @@ import common.CommonSteps;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(UseDataProviderExtension.class)
 public class EquipmentSteps {
@@ -72,19 +73,19 @@ public class EquipmentSteps {
     @Step("Открываем страницу \"3G/4G модемы\" кнопкой")
     public static void clickModem(String URL) {
         equipmentPage.getButtonModem().click();
-        assertEquals(URL, CommonPageActions.getCurrentURL());
+        CommonSteps.checkIsCorrectUrl(URL);
     }
 
     @Step("Открываем страницу \"Маршрутизаторы/IPTV приставки\" кнопкой")
     public static void clickRouter(String URL) {
         equipmentPage.getButtonRouters().click();
-        assertEquals(URL, CommonPageActions.getCurrentURL());
+        CommonSteps.checkIsCorrectUrl(URL);
     }
 
     @Step("Открываем страницу \"Мобильные телефоны\" кнопкой")
     public static void clickSmartphone(String URL) {
         equipmentPage.getButtonSmartphone().click();
-        assertEquals(URL, CommonPageActions.getCurrentURL());
+        CommonSteps.checkIsCorrectUrl(URL);
     }
 
     public static void whereBuy() {
