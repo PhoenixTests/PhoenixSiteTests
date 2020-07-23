@@ -26,7 +26,7 @@ public abstract class SearchSteps {
     @Step("»щем среди найденных результатов ссылку \"{0}\" на нужный раздел")
     public static void checkLink(String text) {
         searchPage.setLinkFind(text);
-        searchPage.waitLinks(700);
+        searchPage.waitLinks(1000);
         assertTrue(searchPage.getLinkFind().exists());
     }
 
