@@ -22,9 +22,9 @@ public class StocksTest extends StocksSteps {
     @DataProvider
     public static Object[][] stocksInformation() {
         return new Object[][]{
-                {"Акция «Приведи друга»", "http://phoenix-dnr.ru/internet-actions-1.php", 0},
-                {"« Тариф «Единый» »", "http://phoenix-dnr.ru/internet-actions-2.php", 1},
-                {"«100 за 160»", "http://phoenix-dnr.ru/internet-actions-6.php", 2},
+                {"Приведи друга", "http://phoenix-dnr.ru/internet-actions-1.php", 0},
+                {"Тариф «Единый»", "http://phoenix-dnr.ru/internet-actions-2.php", 1},
+                {"100 за 160", "http://phoenix-dnr.ru/internet-actions-6.php", 2},
         };
     }
 

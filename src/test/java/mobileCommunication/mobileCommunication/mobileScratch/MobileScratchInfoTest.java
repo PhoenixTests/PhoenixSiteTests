@@ -29,7 +29,7 @@ public class MobileScratchInfoTest extends DefaultMobileScratchSteps{
         mobileScratchPage.getCloseRefillByScratchInfoButton().click();
     }
 
-    @Step("Проверить, что виден блок информации о пополнении счета в почтовой отделении")
+    @Step("Проверить, что виден блок информации о пополнении счета в почтовых отделениях")
     public void checkIsRefillByPostInfoDisplayed() {
         assertTrue(mobileScratchPage.checkIsDisplayed(mobileScratchPage.getRefillByPostInfo()));
     }

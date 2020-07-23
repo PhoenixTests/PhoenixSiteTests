@@ -42,13 +42,13 @@ public class ServiceTest {
         servicePage.getLabel().click();
     }
 
-    @Step("ѕроверка, открылось ли нужное описание дл€ услуги")
+    @Step("ѕроверка, открылось ли описание дл€ услуги")
     public boolean checkBodyOpen(String idBody)
     {
        return servicePage.setBody(idBody).isDisplayed();
     }
 
-    @Step("ѕроверка, закрылось ли нужное описание дл€ услуги")
+    @Step("ѕроверка, закрылось ли описание дл€ услуги")
     public boolean checkBodyClose(String idBody)
     {
         return servicePage.waitBody(idBody, 1500).isDisplayed();

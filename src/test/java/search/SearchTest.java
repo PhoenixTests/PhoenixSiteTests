@@ -73,6 +73,11 @@ public class SearchTest extends SearchSteps {
         SearchSteps.clickInput();
     }
 
+    @Attachment(value = "Скриншот результатов поиска", type = "image/png")
+    public byte[] takeScreenshot() {
+        return CommonPageActions.takeScreenshot();
+    }
+
     @TestTemplate
     @UseDataProvider("textForFind")
     @Feature("Поиск разделов")
@@ -83,6 +88,7 @@ public class SearchTest extends SearchSteps {
         SearchSteps.textInput(textFind + "\n");
         SearchSteps.checkLink(URL);
         SearchSteps.clickLink();
+        takeScreenshot();
     }
 
     @Test

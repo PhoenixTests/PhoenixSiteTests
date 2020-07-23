@@ -108,8 +108,8 @@ public class RateSelectionTest extends DefaultRateSteps {
     @Description("Тест на правильность подбора, в соответствии со значениями ползунков")
     @Severity(SeverityLevel.CRITICAL)
     public void shouldSelectCorrectRate(int calls, int gb, int sms, int rf, String rateName,
-                                               int ratePrice, String rateTitle) {
-        changeRanges(calls,gb,sms,rf);
+                                        int ratePrice, String rateTitle) {
+        changeRanges(calls, gb, sms, rf);
         getRateClick();
         checkRateName(rateName);
         checkRatePrice(ratePrice);
@@ -117,6 +117,8 @@ public class RateSelectionTest extends DefaultRateSteps {
         checkPageTitle(rateTitle);
         CommonSteps.returnBack();
     }
+
+    //TODO два теста с каруселью одинаковые по сути, нужно их объединить в один, чтобы быстрее прогонялись
 
     @TestTemplate
     @UseDataProvider("rates")

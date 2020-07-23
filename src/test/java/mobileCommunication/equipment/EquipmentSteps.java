@@ -59,7 +59,7 @@ public class EquipmentSteps {
         assertTrue(equipmentPage.getButtonCLoseProduct().isDisplayed());
     }
 
-    @Step("Нажимаем на кнопку\"Где купить?\"")
+    @Step("Нажимаем на кнопку \"Где купить?\"")
     public static void clickBuy() {
         equipmentPage.getButtonBuy().click();
     }

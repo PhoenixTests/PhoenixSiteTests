@@ -26,23 +26,23 @@ public class WorldwideCallsTest {
     private static Random random;
 
     @Step("Нажать на подраздел «{unitName}»")
-    public static void openWorldWidePageUnit(WorldwideCallsPage worldwideCallsPage, String unitName) {
+    public void openWorldWidePageUnit(String unitName) {
         worldwideCallsPage.getTypeElement(unitName).click();
     }
 
     @Step("Проверить, что видна надпись 'Код оператора:'")
-    public static void checkOperatorCodeLabel(WorldwideCallsPage worldwideCallsPage) {
+    public void checkOperatorCodeLabel() {
         assertTrue(worldwideCallsPage.setOperatorCodeLabel().exists());
     }
 
     @Step("Проверить, что есть выпадающий список со списком кодов оператора и там есть хотя бы один код")
-    public static void checkOperatorCodesList(WorldwideCallsPage worldwideCallsPage) {
+    public void checkOperatorCodesList() {
         worldwideCallsPage.setOperatorCodeList();
         worldwideCallsPage.checkOperatorCodesList();
     }
 
-    @Step("Нажать на {++country} страну/спутниковую сеть из списка «{unitName}»")
-    public static String clickOnCountry(WorldwideCallsPage worldwideCallsPage, int country,  String unitName) {
+    @Step("Нажать на {country} страну/спутниковую сеть из списка «{unitName}»")
+    public String clickOnCountry(int country, String unitName) {
         worldwideCallsPage.setCountries(country);
         String countryName = worldwideCallsPage.getCountryName().getText();
         worldwideCallsPage.getCountryName().click();
@@ -50,18 +50,18 @@ public class WorldwideCallsTest {
     }
 
     @Step("Проверить, что открыта страница страны {countryName}")
-    public static void checkCountryName(WorldwideCallsPage worldwideCallsPage, String countryName) {
+    public void checkCountryName(String countryName) {
         worldwideCallsPage.setCountries(0);
         assertEquals(countryName, worldwideCallsPage.getCountryName().getText());
     }
 
     @Step("Выбрать код оператора из списка")
-    public static String selectCodeOperator(WorldwideCallsPage worldwideCallsPage) {
+    public String selectCodeOperator() {
         return worldwideCallsPage.selectOperatorCode(random);
     }
 
     @Step("Проверить, что отображается тарификация по коду оператора {operatorCode}")
-    public static void checkTariffing (WorldwideCallsPage worldwideCallsPage, String operatorCode) {
+    public void checkTariffing(String operatorCode) {
         assertEquals("При звонке на номер:", worldwideCallsPage.getCostInfo().get(0).getText());
         assertTrue(Pattern.matches(String.format("^\\+%s[\\sX]+", operatorCode), worldwideCallsPage.getCostInfo().get(1).getText()));
         assertEquals("Cтоимость одной минуты разговора составит:", worldwideCallsPage.getCostInfo().get(2).getText());
@@ -70,7 +70,7 @@ public class WorldwideCallsTest {
     }
 
     @Step("Проверить, что при нажатии на '...' в выпадающем списке кодов оператора информация о тарификации скроется ")
-    public static void checkIsTariffingInfoHidden(WorldwideCallsPage worldwideCallsPage) {
+    public void checkIsTariffingInfoHidden() {
         worldwideCallsPage.setOperatorCodeListThreeDots();
         worldwideCallsPage.getOperatorCodeListThreeDots().click();
         worldwideCallsPage.checkTariffingInfoHidden();
@@ -86,7 +86,6 @@ public class WorldwideCallsTest {
     @Step("Нажать на букву {letter} из алфавита")
     public void clickOnLetter(String letter) {
         worldwideCallsPage.getLetter().click();
-//        worldwideCallsPage.getAlphabet().get(letterNum).click();
     }
 
     @Step("Нажать на кнопку с буквой под алфавитом")
@@ -103,14 +102,13 @@ public class WorldwideCallsTest {
     }
 
     private void defaultOperationsWithCountry(int country, String unitName) {
-        String countryName=clickOnCountry(worldwideCallsPage, country,
-                unitName);
-        checkCountryName(worldwideCallsPage, countryName);
-        checkOperatorCodeLabel(worldwideCallsPage);
-        checkOperatorCodesList(worldwideCallsPage);
-        String operatorCode = selectCodeOperator(worldwideCallsPage);
-        checkTariffing(worldwideCallsPage, operatorCode);
-        checkIsTariffingInfoHidden(worldwideCallsPage);
+        String countryName = clickOnCountry(country, unitName);
+        checkCountryName(countryName);
+        checkOperatorCodeLabel();
+        checkOperatorCodesList();
+        String operatorCode = selectCodeOperator();
+        checkTariffing(operatorCode);
+        checkIsTariffingInfoHidden();
     }
 
     @TestTemplate
@@ -119,7 +117,7 @@ public class WorldwideCallsTest {
     @Description("Выбор страны/спутниковой сети из списка в подразделе Популярные/Прочее, просмотр тарификации")
     @Severity(SeverityLevel.MINOR)
     public void shouldRedirectPopularCountryOrOthers(String unitName) {
-        openWorldWidePageUnit(worldwideCallsPage, unitName);
+        openWorldWidePageUnit(unitName);
         defaultOperationsWithCountry(random.nextInt(worldwideCallsPage.getCountries().size()), unitName);
     }
 
@@ -128,7 +126,7 @@ public class WorldwideCallsTest {
     @Description("Выбор страны из списка, просмотр тарификации")
     @Severity(SeverityLevel.MINOR)
     public void shouldRedirectToTheCountry() {
-        openWorldWidePageUnit(worldwideCallsPage, "Все страны");
+        openWorldWidePageUnit("Все страны");
         worldwideCallsPage.setLetter(random.nextInt(worldwideCallsPage.getAlphabet().size()));
         clickOnLetter(worldwideCallsPage.getLetter().getText());
         defaultOperationsWithCountry(0, "Все страны");
