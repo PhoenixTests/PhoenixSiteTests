@@ -1,5 +1,6 @@
 package internet.setup;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Data;
 import lombok.Getter;
@@ -19,9 +20,14 @@ public class SetupPage {
 
     private SelenideElement buttonsGroup = $(byId("hexagon_internet_setup"));
     private SelenideElement OSButton;
-    private SelenideElement instructionTitle=$(byId("text")).$(By.tagName("h3"));
+    private SelenideElement instructionTitle = $(byId("text")).$(By.tagName("h3"));
+    private SelenideElement instruction = $(byId("text")).$(By.tagName("ol"));
 
     public SelenideElement getOSButton(String hrefValue) {
         return buttonsGroup.$(byAttribute("href", hrefValue));
+    }
+
+    public void checkIsInstructionVisibleAndNotEmpty() {
+        instruction.shouldBe(Condition.visible).shouldNotBe(Condition.empty);
     }
 }
