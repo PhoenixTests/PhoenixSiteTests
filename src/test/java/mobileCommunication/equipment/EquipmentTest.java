@@ -14,7 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith(UseDataProviderExtension.class)
 @ExtendWith(DataProviderExtension.class)
 @Epic("Оборудование")
-public class CatalogTest {
+public class EquipmentTest {
 
     @DataProvider
     public static Object[][] URL() {
@@ -35,7 +35,7 @@ public class CatalogTest {
     public void informationAboutProduct(String namePage, String URL) {
         CommonSteps.openPage(namePage, URL);
         EquipmentSteps.closeAdvertising();
-        EquipmentSteps.getCatalog();
+        EquipmentSteps.setAllInformation();
         EquipmentSteps.cycleCatalog();
     }
 
@@ -45,13 +45,13 @@ public class CatalogTest {
     @Description("Переключение по страницам раздела \"Оборудование\" с помощью кнопок и просмотр информации о местах покупки")
     @Severity(SeverityLevel.NORMAL)
     public void slideDepartment(){
-        CommonSteps.openPage(URL()[0][0].toString(), URL()[0][1].toString());
+        CommonSteps.openPage("Мобильные телефоны", "http://phoenix-dnr.ru/catalog.php?category=1");
         EquipmentSteps.closeAdvertising();
-        EquipmentSteps.clickModem(URL()[1][1].toString());
+        EquipmentSteps.clickModem("http://phoenix-dnr.ru/catalog.php?category=2");
         EquipmentSteps.whereBuy();
-        EquipmentSteps.clickRouter(URL()[2][1].toString());
+        EquipmentSteps.clickRouter("http://phoenix-dnr.ru/catalog.php?category=3");
         EquipmentSteps.whereBuy();
-        EquipmentSteps.clickSmartphone(URL()[0][1].toString());
+        EquipmentSteps.clickSmartphone("http://phoenix-dnr.ru/catalog.php?category=1");
         EquipmentSteps.whereBuy();
     }
 

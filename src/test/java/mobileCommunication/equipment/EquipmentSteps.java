@@ -14,8 +14,8 @@ public class EquipmentSteps {
 
     static EquipmentPage equipmentPage = new EquipmentPage();
 
-    @Step("Находим все кнопки \"Подробнее\"")
-    public static void getCatalog() {
+    @Step("Находим все товары на странице")
+    public static void setAllInformation() {
         equipmentPage.setAllButtonInformation();
     }
 
@@ -88,6 +88,12 @@ public class EquipmentSteps {
         CommonSteps.checkIsCorrectUrl(URL);
     }
 
+    @Step("Проверяем, совпадает ли имя и цена")
+    public static void checkNameAndPrice(String name, String price) {
+        equipmentPage.setProductNameAndPrice(name, price);
+        assertTrue(equipmentPage.getProductName().exists() && equipmentPage.getProductPrice().exists());
+    }
+
     public static void whereBuy() {
         clickBuy();
         clickBuyClose();
@@ -95,15 +101,18 @@ public class EquipmentSteps {
 
     public static void cycleCatalog() {
         for(int i = 0; i < equipmentPage.getAllButtonInformation().size(); i++) {
-            EquipmentSteps.openInformation(i);
+            openInformation(i);
+            String name = equipmentPage.getAllProductsNames().get(i).getText();
+            String price = equipmentPage.getAllProductsPrice().get(i).getText();
             CommonPageActions.switchToFrame(equipmentPage.getFramePopup());
+            checkNameAndPrice(name, price);
             equipmentPage.setButtonNext();
             equipmentPage.setButtonBack();
             if (equipmentPage.getButtonNext().isDisplayed()){
-                EquipmentSteps.leafImg();
-                EquipmentSteps.backImg();
+                leafImg();
+                backImg();
             }
-            EquipmentSteps.closeInformation(i);
+            closeInformation(i);
         }
     }
 

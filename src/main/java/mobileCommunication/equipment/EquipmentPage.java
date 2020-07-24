@@ -5,6 +5,8 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Data;
 import lombok.Getter;
+import lombok.ToString;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -19,6 +21,12 @@ public class EquipmentPage {
 
     //elements
     private ElementsCollection allButtonInformation;
+    @ToString.Exclude
+    private ElementsCollection allProductsNames = $(byId("text")).$$(By.tagName("h3"));
+    @ToString.Exclude
+    private ElementsCollection allProductsPrice = $(byId("text")).$$(By.tagName("p"));
+    private SelenideElement productName;
+    private SelenideElement productPrice;
     private SelenideElement buttonNext;
     private SelenideElement buttonBack;
     private SelenideElement buttonCLoseProduct;
@@ -36,6 +44,11 @@ public class EquipmentPage {
     //search for a product catalog on a page
     public void setAllButtonInformation() {
         allButtonInformation = $$(byText("Подробнее"));
+    }
+
+    public void setProductNameAndPrice(String name, String price) {
+        productName = $(byText(name));
+        productPrice = $(byText(price));
     }
 
     public void setButtonNext() {
