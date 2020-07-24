@@ -1,19 +1,26 @@
 package mobileCommunication.mobileCommunication.mobileScratch;
 
 import common.CommonPageActions;
-import common.CommonSteps;
-import io.qameta.allure.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Step;
 
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Epic("Раздел «Пополнение счета»")
-@Feature("Тестирование просмотра информации о способах пополнения счета по городам")
-public class MobileScratchInfoTest extends DefaultMobileScratchSteps{
+public abstract class MobileScratchSteps {
+    protected static MobileScratchPage mobileScratchPage;
+    protected static Random random;
+
+    @Step("Нажать на способ пополнения счета «Пополнить с помощью скретч-карты»")
+    public void clickOnRefillByScratch() {
+        mobileScratchPage.getRefillByScratch().click();
+    }
+
+    @Step("Выбрать город из выпадающего списке (пополнение с помощью скретч-карт)")
+    public void selectCityByScratch() {
+        int maxByScratchSalePointsSize = mobileScratchPage.getByScratchSalePoints().size();
+        mobileScratchPage.byScratchSelectCity(random.nextInt(maxByScratchSalePointsSize));
+    }
 
     @Step("Нажать на способ пополнения счета «Пополнить в почтовом отделении»")
     public void clickOnRefillByPost() {
@@ -80,16 +87,14 @@ public class MobileScratchInfoTest extends DefaultMobileScratchSteps{
         String address = "Адрес:";
         int byScratchCitySalePointsSize = mobileScratchPage.getByScratchCitySalePoints().size();
         while (address.equals("Адрес:")) {
-            address = mobileScratchPage.getByScratchCitySalePoints()
-                    .get(random.nextInt(byScratchCitySalePointsSize))
-                    .getText();
+            address = mobileScratchPage.getByScratchCitySalePointName(random.nextInt(byScratchCitySalePointsSize));
         }
         return address;
     }
 
     @Step("Ввести в поле адрес '{address}'")
     public void inputAddress(String address) {
-        mobileScratchPage.getUserAddress().setValue(address);
+        mobileScratchPage.setUserAddressValue(address);
     }
 
     @Step("Нажать на кнопку 'Найти ближайшую точку продажи'")
@@ -118,46 +123,4 @@ public class MobileScratchInfoTest extends DefaultMobileScratchSteps{
     public void checkIsMapWindowClosed() {
         assertTrue(mobileScratchPage.checkIsNotDisplayed(mobileScratchPage.getMapFrame()));
     }
-
-    @BeforeAll
-    public static void openPage() {
-        random = new Random();
-        mobileScratchPage = new MobileScratchPage();
-        CommonSteps.openPage(MobileScratchPage.getPageName(), MobileScratchPage.getURL());
-    }
-
-    @Test
-    @DisplayName("Пополнить в почтовом отделении")
-    @Description("Просмотр отделений «Почты Донбасса», где принимаются платежи «ФЕНИКС»")
-    @Severity(SeverityLevel.MINOR)
-    public void shouldOpenRefillByPostInfo() {
-        clickOnRefillByPost();
-        checkIsRefillByPostInfoDisplayed();
-        selectCityByPost();
-        checkIsCityByPostDisplayed(mobileScratchPage.getByPostSelectCity().getSelectedText());
-        clickOnCloseRefillByPostInfoButton();
-        checkIsRefillByPostInfoNotDisplayed();
-    }
-
-    @Test
-    @DisplayName("Пополнить с помощью скретч-карты")
-    @Description("Просмотр точек продажи скретч-карт, поиск по карте")
-    @Severity(SeverityLevel.MINOR)
-    public void shouldOpenRefillByScratchInfo() {
-        clickOnRefillByScratch();
-        checkIsRefillByScratchInfoDisplayed();
-        selectCityByScratch();
-        checkIsCityByScratchDisplayed(mobileScratchPage.getByScratchSelectCity().getSelectedText());
-        String address = selectFromSalePointsTable();
-        clickOnClosestSalePointButton();
-        checkIsUserAddressTextFieldDisplayed();
-        inputAddress(address);
-        clickOnFindOnMapButton();
-        checkIsMapDisplayed();
-        closeMapWindow();
-        checkIsMapWindowClosed();
-        clickOnCloseRefillByScratchInfoButton();
-        checkIsRefillByScratchInfoNotDisplayed();
-    }
-
 }
