@@ -49,7 +49,7 @@ public class ServiceTest {
     }
 
     @Step("ѕроверка, закрылось ли описание дл€ услуги")
-    public boolean checkBodyClose(String idBody)
+    public boolean checkBodyIsDisplayed(String idBody)
     {
         return servicePage.waitBody(idBody, 1500).isDisplayed();
     }
@@ -72,7 +72,7 @@ public class ServiceTest {
         clickLabel(nameLabel);
         assertTrue(checkBodyOpen(idBody));
         clickButton(idButton);
-        assertFalse(checkBodyClose(idBody));
+        assertFalse(checkBodyIsDisplayed(idBody));
     }
 
 }

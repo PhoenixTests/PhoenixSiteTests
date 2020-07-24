@@ -58,6 +58,10 @@ public class SearchTest extends SearchSteps {
                 {"новости", "http://phoenix-dnr.ru/news.php"},
                 {"о нас", "http://phoenix-dnr.ru/about.php"},
                 {"контакты", "http://phoenix-dnr.ru/contacts.php"},
+                {"Привет Сири!", "Ничего не найдено."},
+                {"", "Вы не ввели поисковый запрос!"},
+                {"<script> alert(\"Hello!\");  </script>", "Ничего не найдено."},
+                {"\\<script> alert(\"Hello!\");  </script>", "Ничего не найдено."},
         };
     }
 
@@ -88,6 +92,8 @@ public class SearchTest extends SearchSteps {
         SearchSteps.textInput(textFind + "\n");
         takeScreenshot();
         SearchSteps.checkLink(URL);
+        if (URL.indexOf("http") > -1)
+            SearchSteps.clickLink(URL);
     }
 
     @Test
@@ -96,8 +102,7 @@ public class SearchTest extends SearchSteps {
     @Description("Открытие статистики и переход по ссылке")
     @Severity(SeverityLevel.NORMAL)
     public void statistics() {
-        SearchSteps.textInput(textForFind()[39][0].toString() + "\n");
-        SearchSteps.checkLink(textForFind()[39][1].toString());
+        SearchSteps.textInput("мобильная связь\n");
         SearchSteps.clickStatistics();
         CommonSteps.switchToAnotherWindow(1);
         SearchSteps.clickLinkWebsite();
