@@ -5,6 +5,8 @@ import com.tngtech.junit.dataprovider.UseDataProviderExtension;
 import common.CommonPageActions;
 import common.CommonSteps;
 import io.qameta.allure.*;
+import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -120,8 +123,17 @@ public class AttachedDocumentsTest {
     @Description("Скачивание документа 'Уставные_документы.rar'")
     @Severity(SeverityLevel.MINOR)
     public void shouldDownloadRarDocument() {
-        File statutory =downloadRarDocument();
+        File statutory = downloadRarDocument();
         checkIsFileDownloaded(statutory);
         cheIsDocNameAsExpected("Уставные_документы.rar", statutory.getName());
+    }
+
+    @AfterAll
+    public static void deleteDirectory() {
+        try {
+            FileUtils.deleteDirectory(new File("build/downloads"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
