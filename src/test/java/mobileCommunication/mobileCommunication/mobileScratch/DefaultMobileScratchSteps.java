@@ -15,6 +15,7 @@ public abstract class DefaultMobileScratchSteps {
 
     @Step("Выбрать город из выпадающего списке (пополнение с помощью скретч-карт)")
     public void selectCityByScratch() {
-        mobileScratchPage.getByScratchSelectCity().selectOption(random.nextInt(mobileScratchPage.getByScratchSalePoints().size()));
+        int maxByScratchSalePointsSize = mobileScratchPage.getByScratchSalePoints().size();
+        mobileScratchPage.byScratchSelectCity(random.nextInt(maxByScratchSalePointsSize));
     }
 }

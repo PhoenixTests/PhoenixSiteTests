@@ -1,5 +1,6 @@
 package mobileCommunication.mobileCommunication.mobileScratch;
 
+import common.CommonPageActions;
 import common.CommonSteps;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.BeforeAll;
@@ -41,18 +42,19 @@ public class MobileScratchInfoTest extends DefaultMobileScratchSteps{
 
     @Step("Выбрать город из выпадающего списке (пополнение счета в почтовом отделении)")
     public void selectCityByPost() {
-        mobileScratchPage.getByPostSelectCity().selectOption(random.nextInt(mobileScratchPage.getByPostCities().size()));
+        int byPostCitiesSize = mobileScratchPage.getByPostCities().size();
+        mobileScratchPage.byPostSelectCity(random.nextInt(byPostCitiesSize));
     }
 
     @Step("Проверить, что отобразились адреса почтовых отделений в городе {city}")
     public void checkIsCityByPostDisplayed(String city) {
-        mobileScratchPage.setByPostAddresses(mobileScratchPage.getByPostSelectCity().getSelectedValue());
+        mobileScratchPage.setByPostAddresses();
         assertTrue(mobileScratchPage.checkIsDisplayed(mobileScratchPage.getByPostAddresses()));
     }
 
     @Step("Проверить, что отобразились адреса точек продажи скретч-карт в городе {city}")
     public void checkIsCityByScratchDisplayed(String city) {
-        mobileScratchPage.setByScratchAddresses(mobileScratchPage.getByScratchSelectCity().getSelectedValue());
+        mobileScratchPage.setByScratchAddresses();
         assertTrue(mobileScratchPage.checkIsDisplayed(mobileScratchPage.getByScratchAddresses()));
     }
 
@@ -66,10 +68,61 @@ public class MobileScratchInfoTest extends DefaultMobileScratchSteps{
         assertTrue(mobileScratchPage.checkIsNotDisplayed(mobileScratchPage.getRefillByScratchInfo()));
     }
 
+    @Step("Нажать на кнопку 'Найти ближайшую точку продажи'")
+    public void clickOnClosestSalePointButton() {
+        mobileScratchPage.getFindClosestSalePointButton().click();
+    }
+
+    @Step("Выбрать из списка точку продаж скретч-карт")
+    public String selectFromSalePointsTable() {
+        mobileScratchPage.setByScratchAddresses();
+        mobileScratchPage.setByScratchCitySalePoints();
+        String address = "Адрес:";
+        int byScratchCitySalePointsSize = mobileScratchPage.getByScratchCitySalePoints().size();
+        while (address.equals("Адрес:")) {
+            address = mobileScratchPage.getByScratchCitySalePoints()
+                    .get(random.nextInt(byScratchCitySalePointsSize))
+                    .getText();
+        }
+        return address;
+    }
+
+    @Step("Ввести в поле адрес '{address}'")
+    public void inputAddress(String address) {
+        mobileScratchPage.getUserAddress().setValue(address);
+    }
+
+    @Step("Нажать на кнопку 'Найти ближайшую точку продажи'")
+    public void checkIsUserAddressTextFieldDisplayed() {
+        CommonPageActions.switchToFrame(mobileScratchPage.getMapFrame());
+        mobileScratchPage.checkIsDisplayed(mobileScratchPage.getUserAddress());
+    }
+
+    @Step("Нажать на кнопку 'Найти'")
+    public void clickOnFindOnMapButton() {
+        mobileScratchPage.getFindOnMapButton().click();
+    }
+
+    @Step("Проверить, что появилась карта")
+    public void checkIsMapDisplayed() {
+        assertTrue(mobileScratchPage.checkIsDisplayed(mobileScratchPage.getMap()));
+    }
+
+    @Step("Нажать на 'x' чтобы закрыть окно с картой")
+    public void closeMapWindow() {
+        CommonPageActions.exitFromFrame();
+        mobileScratchPage.getMapCloser().click();
+    }
+
+    @Step("Проверить, что окно с картой закрылось")
+    public void checkIsMapWindowClosed() {
+        assertTrue(mobileScratchPage.checkIsNotDisplayed(mobileScratchPage.getMapFrame()));
+    }
+
     @BeforeAll
     public static void openPage() {
-        random=new Random();
-        mobileScratchPage=new MobileScratchPage();
+        random = new Random();
+        mobileScratchPage = new MobileScratchPage();
         CommonSteps.openPage(MobileScratchPage.getPageName(), MobileScratchPage.getURL());
     }
 
@@ -88,13 +141,21 @@ public class MobileScratchInfoTest extends DefaultMobileScratchSteps{
 
     @Test
     @DisplayName("Пополнить с помощью скретч-карты")
-    @Description("Просмотр точек продажи скретч-карт")
+    @Description("Просмотр точек продажи скретч-карт, поиск по карте")
     @Severity(SeverityLevel.MINOR)
     public void shouldOpenRefillByScratchInfo() {
         clickOnRefillByScratch();
         checkIsRefillByScratchInfoDisplayed();
         selectCityByScratch();
         checkIsCityByScratchDisplayed(mobileScratchPage.getByScratchSelectCity().getSelectedText());
+        String address = selectFromSalePointsTable();
+        clickOnClosestSalePointButton();
+        checkIsUserAddressTextFieldDisplayed();
+        inputAddress(address);
+        clickOnFindOnMapButton();
+        checkIsMapDisplayed();
+        closeMapWindow();
+        checkIsMapWindowClosed();
         clickOnCloseRefillByScratchInfoButton();
         checkIsRefillByScratchInfoNotDisplayed();
     }
