@@ -9,8 +9,6 @@ import lombok.Getter;
 import lombok.ToString;
 import org.openqa.selenium.By;
 
-import java.util.Random;
-
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -68,16 +66,15 @@ public class WorldwideCallsPage {
     }
 
     public void setOperatorCodeList() {
-        operatorCodeList=$(byName("selectCode")).$(byName("prefix")).$("optgroup").$$("option");
+        operatorCodeList = $(byName("selectCode")).$(byName("prefix")).$("optgroup").$$("option");
     }
 
     public void setOperatorCodeListThreeDots() {
-        operatorCodeListThreeDots=$(byName("selectCode")).$(byName("prefix")).$("option");
+        operatorCodeListThreeDots = $(byName("selectCode")).$(byName("prefix")).$("option");
     }
 
-    public String selectOperatorCode(Random random) {
-        int operatorCodeListSize=operatorCodeList.size();
-        SelenideElement operatorCode = operatorCodeList.get(random.nextInt(operatorCodeListSize));
+    public String selectOperatorCode(int operatorCodeNum) {
+        SelenideElement operatorCode = operatorCodeList.get(operatorCodeNum);
         operatorCode.click();
         return operatorCode.getValue();
     }
@@ -87,7 +84,22 @@ public class WorldwideCallsPage {
     }
 
     public void setLetter(int letterNum) {
-        letter=alphabet.get(letterNum);
+        letter = alphabet.get(letterNum);
     }
 
+    public String getLabelFromCostInfo(int labelNum) {
+        return costInfo.get(labelNum).getText();
+    }
+
+    public String getLetterText() {
+        return letter.getText();
+    }
+
+    public String getCountryNameText() {
+        return countryName.getText();
+    }
+
+    public String getCostInfoSubText() {
+        return costInfoSub.getText();
+    }
 }
