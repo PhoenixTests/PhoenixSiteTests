@@ -25,8 +25,13 @@ public class SetupPageTest {
     }
 
     @Step("Проверить, что отобразилась инструкция, в заголовке которой есть ОС {OS}")
-    public void checkIsInstructionDisplayed(String OS) {
+    public void checkIsInstructionTitleDisplayed(String OS) {
         assertTrue(setupPage.getInstructionTitle().getText().contains(OS));
+    }
+
+    @Step("Проверить, что отобразилась не пустая инструкция")
+    public void checkIsInstructionVisibleAndNotEmpty() {
+        setupPage.checkIsInstructionVisibleAndNotEmpty();
     }
 
     @DataProvider
@@ -48,10 +53,11 @@ public class SetupPageTest {
     @Description("Тест на работоспособность кнопок для отображения инструкции по настройке интернета")
     @Severity(SeverityLevel.MINOR)
     public void shouldShowSetupInstruction(String url, String OS) {
-        setupPage=new SetupPage();
-        CommonSteps.openPage(SetupPage.getPageName(),SetupPage.getURL());
+        setupPage = new SetupPage();
+        CommonSteps.openPage(SetupPage.getPageName(), SetupPage.getURL());
         clickOnOSButton(OS, url);
-        checkIsInstructionDisplayed(OS);
+        checkIsInstructionTitleDisplayed(OS);
+        checkIsInstructionVisibleAndNotEmpty();
     }
 
 }

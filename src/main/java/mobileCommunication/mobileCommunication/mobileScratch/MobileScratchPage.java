@@ -50,26 +50,42 @@ public class MobileScratchPage {
     private SelenideElement mapCloser = $(byClassName("popup_closer"));
 
     public SelenideElement getMap() {
-        return map.waitUntil(Condition.visible, 5000);
+        return map.waitUntil(Condition.visible, 10000);
     }
 
-    public boolean checkIsDisplayed(SelenideElement element){
+    public boolean checkIsDisplayed(SelenideElement element) {
         return element.waitWhile(Condition.not(Condition.visible), 1000).isDisplayed();
     }
 
-    public boolean checkIsNotDisplayed(SelenideElement element){
+    public boolean checkIsNotDisplayed(SelenideElement element) {
         return !element.waitWhile(Condition.visible, 3000).isDisplayed();
     }
 
-    public void setByPostAddresses(String cityValue) {
-        byPostAddresses=$(byId(String.format("city-post_%s", cityValue)));
+    public void setByPostAddresses() {
+        byPostAddresses = $(byId(String.format("city-post_%s", byPostSelectCity.getSelectedValue())));
     }
 
-    public void setByScratchAddresses(String cityValue) {
-        byScratchAddresses=$(byId(String.format("city-scratch_%s", cityValue)));
+    public void setByScratchAddresses() {
+        byScratchAddresses = $(byId(String.format("city-scratch_%s", byScratchSelectCity.getSelectedValue())));
     }
 
     public void setByScratchCitySalePoints() {
-        byScratchCitySalePoints=byScratchAddresses.$$(By.tagName("tr"));
+        byScratchCitySalePoints = byScratchAddresses.$$(By.tagName("tr"));
+    }
+
+    public void byScratchSelectCity(int option) {
+        byScratchSelectCity.selectOption(option);
+    }
+
+    public void byPostSelectCity(int option) {
+        byPostSelectCity.selectOption(option);
+    }
+
+    public String getByScratchCitySalePointName(int salePointNum) {
+        return byScratchCitySalePoints.get(salePointNum).getText();
+    }
+
+    public void setUserAddressValue(String address) {
+        userAddress.setValue(address);
     }
 }
