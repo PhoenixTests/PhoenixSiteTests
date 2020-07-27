@@ -47,12 +47,6 @@ public class EquipmentSteps {
         assertNotEquals(firstImg, secondImg);
     }
 
-    @Step("Закрываем рекламу")
-    public static void closeAdvertising() {
-        if (equipmentPage.getButtonCLoseAdvertising().isDisplayed())
-            equipmentPage.getButtonCLoseAdvertising().click();
-    }
-
     @Step("Открываем подробную информацию о продукте {0}")
     public static void openInformation(int index) {
         equipmentPage.getAllButtonInformation().get(index).scrollTo();
