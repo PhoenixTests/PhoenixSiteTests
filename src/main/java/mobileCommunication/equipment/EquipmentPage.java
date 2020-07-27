@@ -30,7 +30,7 @@ public class EquipmentPage {
     private SelenideElement buttonNext;
     private SelenideElement buttonBack;
     private SelenideElement buttonCLoseProduct;
-    private SelenideElement buttonCLoseBuy = $(byAttribute("for","pupup_where_buy"));
+    private SelenideElement buttonCLoseBuy = $(byAttribute("for", "pupup_where_buy"));
     private SelenideElement buttonCLoseAdvertising = $(byAttribute("for", "popup_checkbox_greeting_internet"));
     private SelenideElement buttonBuy = $(byClassName("where-buy-btn"));
     private SelenideElement buttonSmartphone = $(byId("first-tab-btn"));
@@ -39,6 +39,8 @@ public class EquipmentPage {
     private SelenideElement imgActive;
     private SelenideElement imgActiveNew;
     private SelenideElement framePopup = $(byId("popup-iframe"));
+    @ToString.Exclude
+    private ElementsCollection productsNames = $(byId("text")).$$(By.tagName("h3"));
     //method
 
     //search for a product catalog on a page

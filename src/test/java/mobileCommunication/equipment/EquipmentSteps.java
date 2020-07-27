@@ -17,6 +17,7 @@ public class EquipmentSteps {
     @Step("Находим все товары на странице")
     public static void setAllInformation() {
         equipmentPage.setAllButtonInformation();
+
     }
 
     @Step("Закрываем подробную информацию о продукте {0}")

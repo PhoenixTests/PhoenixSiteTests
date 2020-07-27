@@ -117,19 +117,4 @@ public class SearchTest extends SearchSteps {
         CommonPageActions.closeCurrentTab();
     }
 
-//    @Test
-//    @Feature("Статистика")
-//    @DisplayName("Закрытие статистики")
-//    @Description("Открытие статистики и закрытие кнопкой")
-//    public void statisticsClose() {
-//        CommonSteps.openPage(SearchPage.getNamePage(), SearchPage.getURL());
-//        SearchSteps.clickSearch(searchPage);
-//        SearchSteps.clickInput(searchPage);
-//        SearchSteps.textInput(searchPage,textForFind()[39][0].toString() + "\n");
-//        SearchSteps.checkLink(searchPage, textForFind()[39][1].toString());
-//        SearchSteps.clickStatistics(searchPage);
-//        CommonSteps.switchToAnotherWindow(1);
-//        SearchSteps.closeWebsite(searchPage);
-//    }
-
 }
