@@ -9,8 +9,8 @@ import org.openqa.selenium.TakesScreenshot;
 
 public class CommonPageActions {
     public static void openPage(String URL) {
-        Configuration.browser = "chrome";
-        System.setProperty("selenide.browser", "chrome");
+        Configuration.browser = "firefox";
+        System.setProperty("selenide.browser", "firefox");
         Selenide.open(URL);
     }
 
