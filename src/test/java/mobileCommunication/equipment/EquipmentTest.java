@@ -34,7 +34,7 @@ public class EquipmentTest {
     @Severity(SeverityLevel.NORMAL)
     public void informationAboutProduct(String namePage, String URL) {
         CommonSteps.openPage(namePage, URL);
-        EquipmentSteps.closeAdvertising();
+        CommonSteps.closeAdvertisingPopup();
         EquipmentSteps.setAllInformation();
         EquipmentSteps.cycleCatalog();
     }
@@ -46,7 +46,7 @@ public class EquipmentTest {
     @Severity(SeverityLevel.NORMAL)
     public void slideDepartment(){
         CommonSteps.openPage("Мобильные телефоны", "http://phoenix-dnr.ru/catalog.php?category=1");
-        EquipmentSteps.closeAdvertising();
+        CommonSteps.closeAdvertisingPopup();
         EquipmentSteps.clickModem("http://phoenix-dnr.ru/catalog.php?category=2");
         EquipmentSteps.whereBuy();
         EquipmentSteps.clickRouter("http://phoenix-dnr.ru/catalog.php?category=3");

@@ -33,6 +33,11 @@ public class CommonSteps {
         }
     }
 
+    @Step("Закрыть окно рекламы")
+    public static void closeAdvertisingPopup() {
+        CommonPageActions.closeAdvertisingPopup();
+    }
+
     @Step("Выход из фрейма")
     public static void exitFrame() {
         CommonPageActions.exitFromFrame();

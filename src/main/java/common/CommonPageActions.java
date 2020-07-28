@@ -1,11 +1,11 @@
 package common;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+
+import static com.codeborne.selenide.Selectors.byAttribute;
+import static com.codeborne.selenide.Selenide.$;
 
 public class CommonPageActions {
     public static void openPage(String URL) {
@@ -53,5 +53,13 @@ public class CommonPageActions {
 
     public static void exitFromFrame() {
         Selenide.switchTo().defaultContent();
+    }
+
+    public static void closeAdvertisingPopup() {
+        SelenideElement advertising = $(byAttribute("for", "popup_checkbox_greeting_internet"));
+        if (advertising.isDisplayed()) {
+            advertising.click();
+            advertising.waitUntil(Condition.disappear, 3000);
+        }
     }
 }

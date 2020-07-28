@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+import static common.CommonSteps.closeAdvertisingPopup;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -75,12 +76,6 @@ public class AttachedDocumentsTest {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-    }
-
-    @Step("Закрыть окно рекламы")
-    public static void closeAdvertisingPopup() {
-        smsDispatchPage.getCloseAdvertisingButton().click();
-        smsDispatchPage.waitWhile();
     }
 
     @BeforeAll
