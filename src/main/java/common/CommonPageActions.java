@@ -9,8 +9,8 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class CommonPageActions {
     public static void openPage(String URL) {
-        Configuration.browser = "chrome";
-        System.setProperty("selenide.browser", "chrome");
+        Configuration.browser = "edge";
+        System.setProperty("selenide.browser", "edge");
         Selenide.open(URL);
     }
 
